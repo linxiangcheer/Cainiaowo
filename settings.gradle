@@ -1,0 +1,8 @@
+include ':study'
+include ':mine'
+include ':login'
+include ':home'
+include ':course'
+include ':common'
+include ':app'
+rootProject.name = "Cainiaowo"
