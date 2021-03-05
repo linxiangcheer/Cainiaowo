@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.cniao5.cainiaowo.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
+
+    private val dash: DashboardViewModel by viewModel()
 
     override fun onCreateView(
             inflater: LayoutInflater,

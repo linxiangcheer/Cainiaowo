@@ -3,8 +3,36 @@ apply from: '../dependencies.gradle'
 
 android {
     //from dependencies.gradle
+
+    //只有独立运行的时候才需要applicationId
+    if (singleModule.toBoolean()){
+        applicationId "com.cniao5.cainiaowo.common"
+    }
+
+
 }
 
 dependencies {
     //from dependencies.gradle
+
+    //okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //第三方工具
+    api 'com.blankj:utilcodex:1.29.0'
+
+    //腾讯的key-value
+    implementation 'com.tencent:mmkv-static:1.2.1'
 }

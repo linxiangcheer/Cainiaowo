@@ -1,3 +1,4 @@
+include ':service'
 include ':study'
 include ':mine'
 include ':login'
