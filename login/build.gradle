@@ -1,10 +1,21 @@
-apply plugin:'com.android.library'
+//根据是否独立运行，将模块作为apk还是module
+if (singleModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
 apply from: '../dependencies.gradle'
 
 android {
     //from dependencies.gradle
+    defaultConfig{
+        //只要独立运行时候才需要applicationId
+        if (singleModule.toBoolean()){
+            applicationId "com.cniao5.cainiaowo.login"
+        }
+    }
 }
-
 dependencies {
+    implementation project(path:':service')
     //from dependencies.gradle
 }
