@@ -3,23 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.cniao5.cainiaowo.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/homeFragment"
+        android:name="com.cniao5.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.cniao5.cainiaowo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/courseFragment"
+        android:name="com.cniao5.course.CourseFragment"
+        android:label="CourseFragment"
+        tools:layout="@layout/fragment_course"
+        />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.cniao5.cainiaowo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/studyFragment"
+        android:name="com.cniao5.study.StudyFragment"
+        android:label="StudyFragment"
+        tools:layout="@layout/fragment_study"
+        />
+
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.cniao5.mine.MineFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine"
+        />
+
 </navigation>

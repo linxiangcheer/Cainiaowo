@@ -11,6 +11,19 @@ android {
 
 dependencies {
     //from dependencies.gradle
+
+    //根据是否独立运行，将模块作为apk还是module
+    if (!singleModule.toBoolean()) { //如果其他模块不是作为app运行的话
+        //其它模块作为app运行的话，就不能依赖库作为lib用
+        implementation project(path: ':mine')
+        implementation project(path: ':course')
+        implementation project(path: ':study')
+        implementation project(path: ':home')
+        implementation project(path: ':login')
+    }
+    implementation project(path: ':service')
+    //今日头条的适配方案
+    implementation 'me.jessyan:autosize:1.2.1'
 }
 
 

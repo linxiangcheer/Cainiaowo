@@ -15,6 +15,9 @@ android {
 dependencies {
     //from dependencies.gradle
 
+    //startup组件 可以在应用启动时简单、高效地初始化组件
+    api 'androidx.startup:startup-runtime:1.0.0'
+
     //okhttp3
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
