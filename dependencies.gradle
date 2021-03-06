@@ -2,7 +2,7 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin" //用于navigation传参时候的一种安全防护
-apply plugin: 'koin' //koin依赖注入框架
+
 
 
 android {
@@ -16,6 +16,7 @@ android {
         versionName lib_version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
 
         //java中Arouter配置方式 生成schema文件，便于查看数据库创建表的详细信息
         javaCompileOptions {
