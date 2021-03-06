@@ -11,4 +11,8 @@ android {
 dependencies {
     //others from dependencies.gradle
     api project(path: ':common')
+
+    //doki 调试辅助工具
+    debugImplementation 'com.didichuxing.doraemonkit:dokitx:3.3.5'
+    releaseImplementation 'com.didichuxing.doraemonkit:dokitx-no-op:3.3.5'
 }

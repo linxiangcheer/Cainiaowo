@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.cniao5.common.ktx.bindView
+import com.cniao5.common.ktx.immediateStatusBar
 
 /*
 * BaseActivity的抽象基类

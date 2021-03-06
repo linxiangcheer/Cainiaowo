@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cniao5.cainiaowo.databinding.ActivityMainBinding
 import com.cniao5.common.base.BaseActivity
+import com.cniao5.common.ktx.application
+import com.test.service.assistant.AssistantApp
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -21,10 +23,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initView() {
         super.initView()
         val navController= findNavController(R.id.fcv_main)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.homeFragment, R.id.courseFragment, R.id.studyFragment, R.id.mineFragment
-        ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
         mBinding.bnvMain.setupWithNavController(navController)
     }
 
