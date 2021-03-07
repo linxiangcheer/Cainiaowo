@@ -6,4 +6,4 @@
 3. Okhttp、Retrofit
 4. Glide、Gson
 5. WebView、Exoplayer
-6. 第三方库辅助工具：Utils、Refresh、X5...
+6. 第三方库辅助工具：ARouter、Koin、EasyPermission、Vacsonic、Lottie、DoKit、Logger、banner..
