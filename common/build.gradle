@@ -3,13 +3,6 @@ apply from: '../dependencies.gradle'
 
 android {
     //from dependencies.gradle
-
-    //只有独立运行的时候才需要applicationId
-    if (singleModule.toBoolean()){
-        applicationId "com.cniao5.cainiaowo.common"
-    }
-
-
 }
 
 dependencies {

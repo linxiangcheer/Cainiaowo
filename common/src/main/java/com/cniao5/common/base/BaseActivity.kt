@@ -24,20 +24,20 @@ abstract class BaseActivity<ActBinding: ViewDataBinding>: AppCompatActivity{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = bindView<ActBinding>(getLayoutRes())
-        initConfig()
         initView()
+        initConfig()
         initData()
     }
 
     @LayoutRes
     abstract fun getLayoutRes(): Int
 
+    //初始化视图
+    open fun initView() { }
+
     //open才能被子类重写 默认fun不能被重写和继承
     //初始化配置
     open fun initConfig() { }
-
-    //初始化视图
-    open fun initView() { }
 
     //初始化数据
     open fun initData() { }
