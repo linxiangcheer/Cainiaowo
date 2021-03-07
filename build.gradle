@@ -35,7 +35,6 @@ buildscript {
 }
 
 apply plugin: 'com.alibaba.arouter'
-apply plugin: 'com.didi.dokit'
 apply plugin: 'koin' //koin依赖注入框架
 
 allprojects {

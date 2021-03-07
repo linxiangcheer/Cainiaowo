@@ -8,6 +8,7 @@ class CnApplication : BaseApplication() {
 
     override fun initConfig() {
         super.initConfig()
+
         //doKit的初始化配置
         AssistantApp.initConfig(application)
     }
