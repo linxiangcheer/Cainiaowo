@@ -2,4 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cniao5.login">
 
+    <application>
+        <activity android:name=".LoginActivity"
+            android:launchMode="singleTop">
+        </activity>
+    </application>
+
 </manifest>

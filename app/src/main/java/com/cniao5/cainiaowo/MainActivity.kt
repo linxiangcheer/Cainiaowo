@@ -24,17 +24,21 @@ import com.cniao5.study.StudyFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.test.service.assistant.AssistantApp
 
+/*
+* App主工程的入口界面
+* */
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getLayoutRes() = R.layout.activity_main
 
     //可以起到复用的效果，首次get对象会初始化，再次get会获取对象的值
     //将索引值和fragment做一个关系映射
-    private val fragments = mapOf<Int, Fragment>(
-        INDEX_HOME to HomeFragment(),
-        INDEX_COURSE to CourseFragment(),
-        INDEX_STUDY to StudyFragment(),
-        INDEX_MINE to MineFragment()
+    //将Fragment改为ReFragment，  此时Fragment UI不可见就销毁，但保存数据
+    private val fragments = mapOf<Int, ReFragment>(
+        INDEX_HOME to { HomeFragment() },
+        INDEX_COURSE to { CourseFragment() },
+        INDEX_STUDY to { StudyFragment() },
+        INDEX_MINE to { MineFragment() }
     )
 
     override fun initConfig() {
@@ -69,15 +73,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 }
 
 //构造函数没有val代表传参，并不属于类内部的成员变量，加了val内部可以成为类的内部成员属性
-class MainViewPagerAdapter(fragmentActivity: FragmentActivity, private val fragments: Map<Int, Fragment>):
+class MainViewPagerAdapter(fragmentActivity: FragmentActivity, private val fragments: Map<Int, ReFragment>):
     FragmentStateAdapter(fragmentActivity) {
 
     //有多少个元素
     override fun getItemCount() = fragments.size
 
-    //创建fragment
-    override fun createFragment(position: Int): Fragment {
-        return fragments[position] ?: error("请确保fragment数据源和viewPager2的index匹配设置")
-    }
+    //创建fragment invoke回调函数，让它实例化创建新的对象
+    override fun createFragment(position: Int) = fragments[position]?.invoke() ?: error("请确保fragment数据源和viewPager2的index匹配设置")
 
 }
+//类型别名定义 传入的是一个代码块，每次都是一个新的Fragment
+typealias ReFragment = () -> Fragment
