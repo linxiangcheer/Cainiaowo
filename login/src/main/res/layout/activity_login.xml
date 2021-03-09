@@ -6,24 +6,21 @@
 
         <variable
             name="vm"
-            type="com.cniao5.login.LoginViewModel" />
+            type="login.LoginViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LoginActivity">
+        >
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/mtoolbar_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="675dp"
             android:minHeight="?android:actionBarSize"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back">
@@ -66,6 +63,8 @@
             android:paddingStart="55dp"
             app:layout_constraintTop_toBottomOf="@+id/iv_logo_login">
 
+            <!--@=双向绑定,输入的时候会赋值到vm对应的obs数据对象-->
+            <!--tools:text只在预览的时候有效-->
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +72,9 @@
                 android:inputType="number"
                 android:maxLength="11"
                 android:text="@={vm.obMobile}"
-                android:singleLine="true" />
+                android:singleLine="true"
+                tools:text="123123"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +103,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_account_login"
             app:passwordToggleEnabled="true"
             >
-            <!--@=双向绑定-->
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,7 +111,9 @@
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:text="@={vm.obPassword}"
-                android:singleLine="true" />
+                android:singleLine="true"
+                tools:text="123123"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -127,11 +130,15 @@
             app:layout_constraintStart_toStartOf="@+id/et_pwd_login"
             app:layout_constraintTop_toTopOf="@+id/et_pwd_login" />
 
+        <!--clickable是否可点击，是否可响应点击事件-->
+        <!--enabled是否启用按钮，false不对触摸产生反应并且不响应点击事件-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="20dp"
+            android:clickable="@{vm.obMobile.length() >= 8 &amp;&amp; vm.obPassword.length() >= 8}"
+            android:enabled="@{vm.obMobile.length() > 0 &amp;&amp; vm.obPassword.length() > 0}"
             android:text="登录"
             android:textColor="@android:color/white"
             android:textSize="16sp"
@@ -157,6 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:text="忘记密码"
+            android:onClick="@{vm::AA}"
             android:textSize="14sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_register_login"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -171,6 +179,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_register_login" />
 
+        <!--View的context对象-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_wechat_login"
             android:layout_width="60dp"
@@ -180,7 +189,9 @@
             app:layout_constraintEnd_toStartOf="@+id/iv_qq_login"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_third_login"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintVertical_chainStyle="spread"
+            android:onClick="@{ () -> vm.wechat(context)}"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_qq_login"
@@ -190,7 +201,9 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="@+id/iv_wechat_login"
             app:layout_constraintEnd_toStartOf="@+id/iv_weibo_login"
-            app:layout_constraintStart_toEndOf="@+id/iv_wechat_login" />
+            app:layout_constraintStart_toEndOf="@+id/iv_wechat_login"
+            android:onClick="@{ (view) -> vm.qq(view)}"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_weibo_login"
@@ -200,7 +213,9 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="@+id/iv_wechat_login"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_qq_login" />
+            app:layout_constraintStart_toEndOf="@+id/iv_qq_login"
+            android:onClick="@{ (view) -> vm.weibo()}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
