@@ -16,10 +16,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 
     //gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    api 'com.google.code.gson:gson:2.8.6'
 
     //retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //implementation有一个权限控制，直接依赖者才能调用 api有穿透性
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //glide
