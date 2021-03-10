@@ -24,6 +24,9 @@ inline fun <reified T> BaseResponse.toEntity(): T? {
         LogUtils.e("server Response Json Ok,But data==null,$code,$message")
         return null
     }
+
+    //todo 如果有需要的话在这里对返回的data数据进行解密然后再tojson fromjson
+
     //如果data不为空，先进行tojson处理再转化为T对象类型的entity string
     //传入LoginRsp就是LoginRsp  传入RegisterRsp就是RegisterRsp
     return kotlin.runCatching {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--如果想让这个style下的属性对外也支持databinding，需要读取配置属性-->
+<resources>
+    <declare-styleable name="ItemSettingsView">
+        <attr name="icon" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="desc" format="string" />
+        <attr name="arrow" format="reference" />
+
+        <attr name="iconColor" format="color" />
+        <attr name="titleColor" format="color" />
+        <attr name="descColor" format="color" />
+        <attr name="arrowColor" format="color" />
+    </declare-styleable>
+</resources>

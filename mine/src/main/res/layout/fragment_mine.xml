@@ -1,27 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="vm"
+            type="com.cniao5.mine.MineViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title_fragment"
+        <View
+            android:id="@+id/v_bg_header_mine"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="MineFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="200dp"
+            android:background="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_icon_mine"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="12dp"
+            app:layout_constraintBottom_toTopOf="@id/v_line_header_mine"
+            app:layout_constraintStart_toStartOf="@id/v_bg_header_mine"
+            app:layout_constraintTop_toTopOf="@id/v_bg_header_mine"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
+            app:srcCompat="@{vm.liveUser.loginRsp.logo_url,default=@drawable/icon_default_header}"
+            />
+
+        <!--反引号是默认值,里面只能写英文-->
+        <!--??就是可以为空-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_user_name_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_icon_mine"
+            app:layout_constraintStart_toEndOf="@id/iv_user_icon_mine"
+            app:layout_constraintTop_toTopOf="@id/iv_user_icon_mine"
+            tools:text="菜鸟窝"
+            android:text="@{vm.liveUser.loginRsp.username??`NameOfNull`}"
+            />
+
+        <View
+            android:id="@+id/v_line_header_mine"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintBottom_toTopOf="@id/tv_orders_mine"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_icon_mine"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_orders_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_money"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="我的订单"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/v_bg_header_mine"
+            app:layout_constraintEnd_toStartOf="@id/tv_coupon_mine"
+            app:layout_constraintStart_toStartOf="@id/v_bg_header_mine"
+            app:layout_constraintTop_toBottomOf="@id/v_line_header_mine"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_coupon_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:drawableTop="@drawable/icon_coupon"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="优惠券"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/v_bg_header_mine"
+            app:layout_constraintEnd_toEndOf="@id/v_bg_header_mine"
+            app:layout_constraintStart_toEndOf="@id/tv_orders_mine"
+            app:layout_constraintTop_toBottomOf="@id/v_line_header_mine"
+            />
+
+
+        <com.cniao5.mine.widget.ItemSettingsView
+            android:id="@+id/isv_study_card_mine"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorWhite"
+            app:icon="@drawable/ic_gift_card"
+            app:layout_constraintTop_toBottomOf="@id/v_bg_header_mine"
+            app:title="学习卡 免费领"
+            />
+
+        <com.cniao5.mine.widget.ItemSettingsView
+            android:id="@+id/isv_share_sale_mine"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/colorWhite"
+            app:icon="@drawable/ic_gift_share"
+            app:layout_constraintTop_toBottomOf="@id/isv_study_card_mine"
+            app:title="分销中心"
+            />
+
+        <com.cniao5.mine.widget.ItemSettingsView
+            android:id="@+id/isv_group_shopping_mine"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/colorWhite"
+            app:icon="@drawable/ic_shopping"
+            app:layout_constraintTop_toBottomOf="@id/isv_share_sale_mine"
+            app:title="我的拼团"
+            />
+
+        <com.cniao5.mine.widget.ItemSettingsView
+            android:id="@+id/isv_liked_course_mine"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/colorWhite"
+            app:icon="@drawable/ic_like_it"
+            app:layout_constraintTop_toBottomOf="@id/isv_group_shopping_mine"
+            app:title="想学的课"
+            />
+
+        <com.cniao5.mine.widget.ItemSettingsView
+            android:id="@+id/isv_feedback_mine"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/colorWhite"
+            app:icon="@drawable/ic_warning"
+            app:layout_constraintTop_toBottomOf="@id/isv_liked_course_mine"
+            app:title="意见反馈"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tips_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="电脑版:https://www.cniao5.com"
+            android:textColor="@color/colorDivider"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/isv_feedback_mine"
+            />
+
+<!--            android:visibility="@{vm.userInfo.username.length()>0?View.VISIBLE:View.GONE}"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout_mine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="26dp"
+            android:elevation="0.1dp"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            app:backgroundTint="@color/colorWhite"
+            app:cornerRadius="20dp"
+            app:elevation="0.1dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_tips_mine"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

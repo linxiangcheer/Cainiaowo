@@ -1,0 +1,28 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    package="com.cniao5.mine">-->
+
+<!--    &lt;!&ndash;网络权限&ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.INTERNET"/>-->
+
+<!--    <application-->
+<!--        android:icon="@mipmap/ic_launcher"-->
+<!--        android:label="@string/module_mine"-->
+<!--        android:roundIcon="@mipmap/ic_launcher_round"-->
+<!--        android:theme="@style/AppTheme"-->
+<!--        >-->
+<!--        &lt;!&ndash;launchMode="singleTop"栈顶如果有activity实例则不会新建&ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name=".MineActivity"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:label="@string/module_mine">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--    </application>-->
+
+<!--</manifest>-->
+<manifest></manifest>
