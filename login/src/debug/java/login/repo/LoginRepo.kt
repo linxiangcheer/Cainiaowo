@@ -27,7 +27,7 @@ class LoginRepo(private val service: LoginService) : ILoginResource{
     override val registerRsp: LiveData<RegisterRsp> = _registerRsp
     override val loginRsp: LiveData<LoginRsp> = _loginRsp
 
-    //校验是否注册
+    //校验是否注册 网络请求
     override suspend fun checkRegister(mobi: String) {
         service.isRegister(mobi)
             .serverData()
@@ -46,22 +46,24 @@ class LoginRepo(private val service: LoginService) : ILoginResource{
             }
     }
 
-    //登录
+    //登录 网络请求
     override suspend fun requestLogin(body: LoginReqBody) {
         service.login(body)
             .serverData()
             .onSuccess { //接口请求成功
                 onBizError { code, message ->
-                    LogUtils.w("是否注册 BizError $code,$message")
+                    LogUtils.w("登录接口 BizError $code,$message")
                 }
                 onBizOK<LoginRsp> { code, data, message ->
                     _loginRsp.value = data
-                    LogUtils.i("是否注册 BizOK $data")
+                    //同步到room数据库 登录状态
+
+                    LogUtils.i("登录接口 BizOK $data")
                     return@onBizOK
                 }
             }
             .onFailure {
-                LogUtils.e("是否注册 接口异常 ${it.message}")
+                LogUtils.e("登录接口 接口异常 ${it.message}")
             }
     }
 

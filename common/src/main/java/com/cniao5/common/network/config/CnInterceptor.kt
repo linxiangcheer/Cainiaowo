@@ -68,13 +68,13 @@ class CnInterceptor : Interceptor {
                 }.onSuccess {
                     val map: Map<String, Any> = gson.fromJson<Map<String, Any>>(it, mapType)
                     map.forEach { entry ->
-                        //FIXME:2020/12/28 value 目前json单层级
+                        // value 目前json单层级
                         signHeaders.add(entry.key to entry.value.toString())
                     }
                 }
             }
         }
-        //todo 算法：都必须是非空参数！！！ sign=MD5(ascii排序后的headers及params的key=value拼接&后，最后拼接
+        //算法：都必须是非空参数！！！ sign=MD5(ascii排序后的headers及params的key=value拼接&后，最后拼接
         // appkey和value) //32位大写
         val signValue: String = attachHeaders
             .sortedBy { it.first }

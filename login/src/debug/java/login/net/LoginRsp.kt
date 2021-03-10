@@ -1,7 +1,10 @@
 package login.net
 
 import androidx.annotation.Keep
+import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
+import com.test.service.repo.UserInfo
+
 /*
 * 登录模块相关的结果响应类
 * */
@@ -19,11 +22,5 @@ data class RegisterRsp(
 /*
 * 手机号和密码登录 接口响应
 * */
-@Keep
-data class LoginRsp(val id: Int, //用户id
-                    @SerializedName("is_bind_phone")
-                    val isBindPhone: Boolean?,
-                    val logo_url: String?, //用户头像
-                    val token: String?,
-                    val username: String? //用户名
-                    )
+//Room类型别名
+typealias LoginRsp = UserInfo.LoginRsp
