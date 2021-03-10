@@ -40,21 +40,14 @@ abstract class DataBase : RoomDatabase() {
 @Entity(tableName = "tv_user")
 data class UserInfo(
     @PrimaryKey
-    val id: Int, //主键
-    @Embedded //内嵌的数据表，User的字段将会被添加到表tv_user中
-    val loginRsp: LoginRsp?
-) {
-    @Keep
-    data class LoginRsp (
-        @ColumnInfo(name = "user_id")
-        val id: Int, //用户id
-        @SerializedName("is_bind_phone")
-        val isBindPhone: Boolean?,
-        val logo_url: String?, //用户头像
-        val token: String?,
-        val username: String? //用户名
-            )
-}
+    val idd: Int, //主键
+    val id: Int, //用户id
+    @SerializedName("is_bind_phone")
+    val isBindPhone: Boolean?,
+    val logo_url: String?, //用户头像
+    val token: String?,
+    val username: String? //用户名
+)
 
 //2、dao层的定义
 @Dao

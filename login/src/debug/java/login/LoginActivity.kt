@@ -49,7 +49,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 LogUtils.i("登录结果:${it}")
 
                 //将数据保存到数据库里
-                DbHelper.insertUserInfo(context, UserInfo(1, LoginRsp(it.id, it.isBindPhone, it.logo_url, it.token, it.username)))
+                DbHelper.insertUserInfo(context, it)
                 //关闭Activity
                 finish()
             }

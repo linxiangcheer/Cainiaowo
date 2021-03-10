@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="@id/v_bg_header_mine"
             app:layout_constraintTop_toTopOf="@id/v_bg_header_mine"
             app:shapeAppearanceOverlay="@style/circleImageStyle"
-            app:srcCompat="@{vm.liveUser.loginRsp.logo_url,default=@drawable/icon_default_header}"
+            app:srcCompat="@{vm.liveUser.logo_url,default=@drawable/icon_default_header}"
             />
 
         <!--反引号是默认值,里面只能写英文-->
@@ -52,7 +52,7 @@
             app:layout_constraintStart_toEndOf="@id/iv_user_icon_mine"
             app:layout_constraintTop_toTopOf="@id/iv_user_icon_mine"
             tools:text="菜鸟窝"
-            android:text="@{vm.liveUser.loginRsp.username??`NameOfNull`}"
+            android:text="@{vm.liveUser.username??`NameOfNull`}"
             />
 
         <View

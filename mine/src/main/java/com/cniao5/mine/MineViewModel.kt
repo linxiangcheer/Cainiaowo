@@ -10,6 +10,9 @@ import com.test.service.repo.UserInfo
 * */
 class MineViewModel: BaseViewModel() {
 
+    /*
+    * MutableLiveData：整个实体类或者数据类型变化后才通知.不会细节到某个字段。
+    * */
     val liveUser = MutableLiveData<UserInfo>()
 
 }

@@ -23,4 +23,4 @@ data class RegisterRsp(
 * 手机号和密码登录 接口响应
 * */
 //Room类型别名
-typealias LoginRsp = UserInfo.LoginRsp
+typealias LoginRsp = UserInfo
