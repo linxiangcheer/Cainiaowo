@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="str_server_host_dokit">切换Host</string>
+    <string name="str_login_or_register">登录/免费注册</string>
 </resources>

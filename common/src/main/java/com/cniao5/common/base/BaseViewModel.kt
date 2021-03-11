@@ -18,8 +18,9 @@ abstract class BaseViewModel : ViewModel() {
 
     /**
      * 启用协程代码块 网络请求
+     * 用protected权限修饰，只能子类实现
      */
-    fun serverAwait(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
+    protected fun serverAwait(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
         isLoading.value = true //协程启动之前
         block.invoke(this)
         isLoading.value = false //协程启动之后

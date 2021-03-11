@@ -25,8 +25,6 @@ abstract class BaseApplication: Application() {
 
         initConfig()
         initData()
-
-        LogUtils.d("BaseApplication onCreate")
     }
 
     /*

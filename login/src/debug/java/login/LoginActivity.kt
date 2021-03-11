@@ -1,12 +1,13 @@
 package login
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.LogUtils
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseActivity
 import com.cniao5.common.ktx.context
+import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
+import com.cniao5.common.utils.MySpUtils
 import com.test.service.repo.DbHelper
-import com.test.service.repo.UserInfo
 import login.databinding.ActivityLoginBinding
 import login.net.LoginRsp
 import login.net.RegisterRsp
@@ -25,7 +26,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding.apply {
             vm = viewModel
             //左上角退出按钮点击事件
-            mtoolbarLogin.setNavigationOnClickListener { finish() }
+            mtoolbarLogin.setNavigationOnClickListener {
+                finish() }
             //注册新账号按钮点击事件
             tvRegisterLogin.setOnClickListener {
                 ToastUtils.showShort("当前课程项目为实现注册账号功能")
@@ -46,11 +48,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 }
             }
             liveLoginRsp.observerKt {
-                LogUtils.i("登录结果:${it}")
-
-                //将数据保存到数据库里
-                DbHelper.insertUserInfo(context, it)
-
+                it.also {
+                    //将数据保存到数据库里
+                    DbHelper.insertUserInfo(context, it)
+                    MySpUtils.put(SP_KEY_USER_TOKEN, it.token)
+                }
                 //关闭Activity
                 finish()
             }

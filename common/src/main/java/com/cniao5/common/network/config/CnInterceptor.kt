@@ -4,7 +4,7 @@ import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.DeviceUtils
 import com.blankj.utilcode.util.EncryptUtils
 import com.blankj.utilcode.util.NetworkUtils
-import com.cniao5.common.utils.CniaoSpUtils
+import com.cniao5.common.utils.MySpUtils
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -37,11 +37,15 @@ class CnInterceptor : Interceptor {
 
             "version" to AppUtils.getAppVersionName()
         )
-        //如果token为空的话不传递
-       // todo val localToken = CniaoSpUtils.getString(SP_KEY_USER_TOKEN, originRequest.header("token")) ?: ""
-        //在网络拦截器中更新token值
-        val localToken = originRequest.header("token") ?: "tokenNull"
-       if (localToken.isNotEmpty() && localToken!="tokenNull") {
+
+        /*
+        * 如果token为空的话不传递
+        * 在网络拦截器中更新token值
+        * CniaoSpUtils  自定义的key-value 轻量数据存储管理类，便于替换
+        * 本地获取token，默认值是原始请求的token
+        * */
+        val localToken = MySpUtils.getString(SP_KEY_USER_TOKEN, originRequest.header("token")) ?: ""
+       if (localToken.isNotEmpty()) {
            attachHeaders.add("token" to localToken)
        }
         val signHeaders:MutableList<Pair<String,String>> = mutableListOf<Pair<String,String>>()

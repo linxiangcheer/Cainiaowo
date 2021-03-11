@@ -7,8 +7,9 @@ import com.tencent.mmkv.MMKV
 /*
  * 自定义的key-value 轻量数据存储管理类，便于替换
  */
-object CniaoSpUtils {
+object MySpUtils {
 
+    //用腾讯的MMKV
     private val kv: MMKV by lazy {
         MMKV.defaultMMKV()
     }

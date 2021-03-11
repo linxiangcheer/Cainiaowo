@@ -2,6 +2,7 @@ package com.cniao5.common.network
 
 import com.cniao5.common.network.config.CnInterceptor
 import com.cniao5.common.network.support.LiveDataCallAdapterFactory
+import com.cniao5.common.utils.HostInterceptor
 import com.zsk.common.network.config.KtHttpLogInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,6 +22,7 @@ object KtRetrofit {
         .retryOnConnectionFailure(true) //重连
         .followRedirects(false)//重定向
 //        .cookieJar(LocalCookieJar())
+        .addInterceptor(HostInterceptor()) //用于替换baseHost的拦截器
         .addNetworkInterceptor(CnInterceptor()) //公共header的拦截器
         .addNetworkInterceptor(KtHttpLogInterceptor {
             logLevel(KtHttpLogInterceptor.LogLevel.BODY)

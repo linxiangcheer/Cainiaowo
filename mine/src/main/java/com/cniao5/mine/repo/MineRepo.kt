@@ -13,7 +13,7 @@ import com.test.service.net.onBizOK
 
 
 /*
-* 实际的数据获取类
+* 获取用户个人信息 实际的数据获取类
 * */
 class MineRepo(private val service: MineService) :IMineResource{
 

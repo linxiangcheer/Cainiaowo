@@ -4,8 +4,10 @@ import login.net.LoginService
 import login.repo.ILoginResource
 import login.repo.LoginRepo
 import com.cniao5.common.network.KtRetrofit
+import com.cniao5.common.utils.getBaseHost
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
+import org.koin.core.parameter.parametersOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -16,9 +18,13 @@ val moduleLogin: Module = module {
 
     //service retrofit
     //single声明单例对象
+    // single {
+    //     KtRetrofit.initConfig("http://yapi.54yct.com/mock/24/") //baseurl
+    //         .getService(LoginService::class.java)
+    // }
+
     single {
-        KtRetrofit.initConfig("http://yapi.54yct.com/mock/24/") //baseurl
-            .getService(LoginService::class.java)
+        get<KtRetrofit> { parametersOf(getBaseHost()) }.getService(LoginService::class.java)
     }
 
     //repo ILoginResource

@@ -4,12 +4,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseFragment
+import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
+import com.cniao5.common.utils.MySpUtils
 import com.cniao5.mine.MineContainerFragment
 import com.cniao5.mine.R
 import com.cniao5.mine.databinding.FragmentMineBinding
+import com.cniao5.mine.repo.MineRepo
 import com.test.service.repo.DbHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /*
@@ -31,7 +41,14 @@ class MineFragment : BaseFragment() {
             btnLogoutMine.setOnClickListener {
                 //清空登录数据
                 DbHelper.deleteUserInfo(requireContext())
-                //跳转到登录界面
+                //清空存储在本地的token
+                MySpUtils.remove(SP_KEY_USER_TOKEN)
+                // 更改为默认用户名
+                // tvUserNameMine.text = "登录/免费注册"
+                // //更改为默认头像
+                // ivUserIconMine.setImageResource(R.drawable.icon_default_header)
+                // 跳转到登录界面
+                //todo 登录后再退出登录，此时点击界面上的返回按钮，viewmodel数据没有清除，图片和用户名都不会刷新
                 ARouter.getInstance().build("/login/login").navigation()
             }
 
@@ -45,6 +62,13 @@ class MineFragment : BaseFragment() {
                 }
             }
 
+            //未登录状态下点击用户名位置跳转到登录界面
+            tvUserNameMine.setOnClickListener {
+                val info = viewModel.liveInfo.value
+                ToastUtils.showShort("此时的username值为${info?.username}")
+                if (info == null) ARouter.getInstance().build("/login/login").navigation()
+            }
+
         }
     }
 
@@ -54,8 +78,12 @@ class MineFragment : BaseFragment() {
         //requireContext 返回此片段的上下文
         //观察数据库的Userinfo,如果拿到userinfo获取用户个人信息，把token传进去
         DbHelper.getLiveUserInfo(requireContext()).observeKt {
-            viewModel.getUserInfo(it?.token)
+            LogUtils.d("当前的token是${it?.token}")
+            it?.let {
+                viewModel.getUserInfo(it.token)
+            }
         }
     }
+
 
 }
