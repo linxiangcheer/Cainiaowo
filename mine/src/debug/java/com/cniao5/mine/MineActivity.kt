@@ -16,21 +16,21 @@ class MineActivity : BaseActivity<ActivityMineBinding>() {
     override fun initView() {
         super.initView()
         mBinding.apply {
-            val ib = ItemSettingsBean(iconRes = R.drawable.ic_back, desc = "你好", title="学习卡")
-
-            val obBean = ObservableField(ib)
-            bean = obBean
-
-            ib.title = "你的学习卡"
-            ib.titleColor = Color.RED
-            ib.iconRes = R.drawable.icon_server_host
-
-            isvCard.onClickArrow {
-                ToastUtils.showShort("点击箭头")
-            }
-            isvCard.setOnClickListener {
-                ToastUtils.showShort("点击整个Item")
-            }
+            // val ib = ItemSettingsBean(iconRes = R.drawable.ic_back, desc = "你好", title="学习卡")
+            //
+            // val obBean = ObservableField(ib)
+            // bean = obBean
+            //
+            // ib.title = "你的学习卡"
+            // ib.titleColor = Color.RED
+            // ib.iconRes = R.drawable.icon_server_host
+            //
+            // isvCard.onClickArrow {
+            //     ToastUtils.showShort("点击箭头")
+            // }
+            // isvCard.setOnClickListener {
+            //     ToastUtils.showShort("点击整个Item")
+            // }
         }
     }
 }
