@@ -7,7 +7,9 @@
 
         <variable
             name="vm"
-            type="com.cniao5.mine.MineViewModel" />
+            type="com.cniao5.mine.ui.MineViewModel" />
+
+        <import type="android.view.View"/>
 
     </data>
 
@@ -35,7 +37,7 @@
             app:layout_constraintStart_toStartOf="@id/v_bg_header_mine"
             app:layout_constraintTop_toTopOf="@id/v_bg_header_mine"
             app:shapeAppearanceOverlay="@style/circleImageStyle"
-            app:srcCompat="@{vm.liveUser.logo_url,default=@drawable/icon_default_header}"
+            app:srcCompat="@{vm.liveInfo.logoUrl,default=@drawable/icon_default_header}"
             />
 
         <!--反引号是默认值,里面只能写英文-->
@@ -52,7 +54,7 @@
             app:layout_constraintStart_toEndOf="@id/iv_user_icon_mine"
             app:layout_constraintTop_toTopOf="@id/iv_user_icon_mine"
             tools:text="菜鸟窝"
-            android:text="@{vm.liveUser.username??`NameOfNull`}"
+            android:text="@{vm.liveInfo.username??`NameOfNull`}"
             />
 
         <View
@@ -165,14 +167,13 @@
             app:layout_constraintTop_toBottomOf="@id/isv_feedback_mine"
             />
 
-<!--            android:visibility="@{vm.userInfo.username.length()>0?View.VISIBLE:View.GONE}"-->
+<!--            android:visibility="@{vm.liveInfo.username.length() > 0 ? View.VISIBLE:View.GONE}"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logout_mine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="26dp"
-            android:elevation="0.1dp"
             android:gravity="center"
             android:text="退出登录"
             android:textColor="@color/colorSecondaryText"

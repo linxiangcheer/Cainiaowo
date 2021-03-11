@@ -1,28 +1,16 @@
 package com.cniao5.cainiaowo
 
-import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.cniao5.cainiaowo.databinding.ActivityMainBinding
 import com.cniao5.common.base.BaseActivity
-import com.cniao5.common.ktx.application
 import com.cniao5.common.widget.BnvVp2Mediator
 import com.cniao5.course.CourseFragment
 import com.cniao5.home.HomeFragment
-import com.cniao5.mine.MineFragment
+import com.cniao5.mine.MineContainerFragment
+import com.cniao5.mine.ui.MineFragment
 import com.cniao5.study.StudyFragment
-import com.google.android.material.tabs.TabLayoutMediator
-import com.test.service.assistant.AssistantApp
 
 /*
 * App主工程的入口界面
@@ -38,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         INDEX_HOME to { HomeFragment() },
         INDEX_COURSE to { CourseFragment() },
         INDEX_STUDY to { StudyFragment() },
-        INDEX_MINE to { MineFragment() }
+        INDEX_MINE to { MineContainerFragment() }
     )
 
     override fun initConfig() {
