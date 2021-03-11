@@ -50,6 +50,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                 //将数据保存到数据库里
                 DbHelper.insertUserInfo(context, it)
+
                 //关闭Activity
                 finish()
             }
