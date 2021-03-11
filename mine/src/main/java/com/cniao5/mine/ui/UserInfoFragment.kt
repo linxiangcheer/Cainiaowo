@@ -26,8 +26,6 @@ class UserInfoFragment : BaseFragment() {
             //toolbar返回上个界面
             //toolbar.setupWithNavController(findNavController())
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
-            //修改返回图标颜色
-            // toolbar.navigationIcon?.setTint(Color.WHITE)
             //保存按钮
             saveBtn.setOnClickListener { findNavController().navigateUp() }
 

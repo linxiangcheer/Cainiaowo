@@ -2,6 +2,9 @@ package com.cniao5.mine.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseViewModel
 import com.cniao5.mine.repo.IMineResource
 import com.test.service.repo.UserInfo
@@ -22,8 +25,5 @@ class MineViewModel(private val repo: IMineResource): BaseViewModel() {
             repo.getUserInfo(token)
         }
     }
-
-
-
 
 }

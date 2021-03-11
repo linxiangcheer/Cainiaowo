@@ -2,6 +2,7 @@ package com.test.service.assistant
 
 import android.app.Application
 import com.didichuxing.doraemonkit.DoraemonKit
+import com.didichuxing.doraemonkit.kit.AbstractKit
 
 
 /*
@@ -10,7 +11,7 @@ import com.didichuxing.doraemonkit.DoraemonKit
 object AssistantApp {
 
     fun initConfig(application: Application){
-        DoraemonKit.install(application)
+        DoraemonKit.install(application, mutableListOf(ServiceHostKit()))
     }
 
 }
