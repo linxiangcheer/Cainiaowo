@@ -1,6 +1,12 @@
 package com.cniao5.mine
 
+import com.cniao5.common.network.KtRetrofit
+import com.cniao5.mine.net.MineService
+import com.cniao5.mine.repo.IMineResource
+import com.cniao5.mine.repo.MineRepo
+import com.cniao5.mine.ui.MineViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 /*
@@ -8,5 +14,15 @@ import org.koin.dsl.module
 * */
 val moduleMine = module {
 
-    viewModel { MineViewModel() }
+    //service retrofit
+    //single声明单例对象
+    single {
+        KtRetrofit.initConfig("http://yapi.54yct.com/mock/24/") //baseurl
+            .getService(MineService::class.java)
+    }
+
+    //repo IMineResource
+    single { MineRepo(get()) } bind IMineResource::class
+
+    viewModel { MineViewModel(get()) }
 }

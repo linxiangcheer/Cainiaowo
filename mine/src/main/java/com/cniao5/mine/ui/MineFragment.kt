@@ -1,16 +1,15 @@
-package com.cniao5.mine
+package com.cniao5.mine.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.navigation.fragment.findNavController
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.LogUtils
 import com.cniao5.common.base.BaseFragment
+import com.cniao5.mine.MineContainerFragment
+import com.cniao5.mine.R
 import com.cniao5.mine.databinding.FragmentMineBinding
 import com.test.service.repo.DbHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /*
@@ -35,21 +34,27 @@ class MineFragment : BaseFragment() {
                 //跳转到登录界面
                 ARouter.getInstance().build("/login/login").navigation()
             }
-            isvStudyCardMine.setOnClickListener {
-                GlobalScope.launch(Dispatchers.IO) {
-                    LogUtils.i("${DbHelper.getUserInfo(requireContext())}")
+
+            //头像 跳转到 个人信息
+            ivUserIconMine.setOnClickListener {
+                //点击的时候赋值以免拿到空值
+                val info = viewModel.liveInfo.value
+                info?.let {
+                    val action = MineFragmentDirections.actionMineFragmentToUserInfoFragment(info)
+                    findNavController().navigate(action)
                 }
             }
+
         }
     }
 
     override fun initData() {
         super.initData()
+        //登录成功后会跳转到Mine这个界面，然后去获取数据库里的数据
         //requireContext 返回此片段的上下文
-        DbHelper.getLiveUserInfo(requireContext()).observeKt { info ->
-            LogUtils.i("拿到登录后的数据")
-            //观察登录后的数据
-            viewModel.liveUser.value = info
+        //观察数据库的Userinfo,如果拿到userinfo获取用户个人信息，把token传进去
+        DbHelper.getLiveUserInfo(requireContext()).observeKt {
+            viewModel.getUserInfo(it?.token)
         }
     }
 
