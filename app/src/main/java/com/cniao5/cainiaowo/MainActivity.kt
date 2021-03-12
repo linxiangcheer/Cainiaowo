@@ -73,3 +73,4 @@ class MainViewPagerAdapter(fragmentActivity: FragmentActivity, private val fragm
 }
 //类型别名定义 传入的是一个代码块，每次都是一个新的Fragment
 typealias ReFragment = () -> Fragment
+

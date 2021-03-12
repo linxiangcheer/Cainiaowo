@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="@id/v_bg_header_mine"
             app:layout_constraintTop_toTopOf="@id/v_bg_header_mine"
             app:shapeAppearanceOverlay="@style/circleImageStyle"
-            app:srcCompat="@{vm.liveInfo.logoUrl,default=@drawable/icon_default_header}"
+            app:srcCompat="@{vm.liveInfoRsp.logoUrl,default=@drawable/icon_default_header}"
             />
 
         <!--反引号是默认值,里面只能写英文-->
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toEndOf="@id/iv_user_icon_mine"
             app:layout_constraintTop_toTopOf="@id/iv_user_icon_mine"
             tools:text="菜鸟窝"
-            android:text="@{vm.liveInfo.username??@string/str_login_or_register}"
+            android:text="@{vm.liveInfoRsp.username??@string/str_login_or_register}"
             />
 
         <View
@@ -181,7 +181,7 @@
             app:cornerRadius="20dp"
             app:elevation="0.1dp"
             app:layout_constraintTop_toBottomOf="@id/tv_tips_mine"
-            android:visibility="@{vm.liveInfo.username.length() > 0 ? View.VISIBLE:View.GONE}"
+            android:visibility="@{vm.liveInfoRsp.username.length() > 0 ? View.VISIBLE:View.GONE}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

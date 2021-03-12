@@ -4,22 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseFragment
 import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
 import com.cniao5.common.utils.MySpUtils
-import com.cniao5.mine.MineContainerFragment
 import com.cniao5.mine.R
 import com.cniao5.mine.databinding.FragmentMineBinding
-import com.cniao5.mine.repo.MineRepo
+import com.cniao5.mine.net.UserInfoRsp
+import com.cniao5.mine.repo.UserInfoRspDB
+import com.cniao5.mine.repo.UserInfoRspDBHelper
 import com.test.service.repo.DbHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.internal.notify
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /*
@@ -43,19 +39,16 @@ class MineFragment : BaseFragment() {
                 DbHelper.deleteUserInfo(requireContext())
                 //清空存储在本地的token
                 MySpUtils.remove(SP_KEY_USER_TOKEN)
-                // 更改为默认用户名
-                // tvUserNameMine.text = "登录/免费注册"
-                // //更改为默认头像
-                // ivUserIconMine.setImageResource(R.drawable.icon_default_header)
-                // 跳转到登录界面
-                //todo 登录后再退出登录，此时点击界面上的返回按钮，viewmodel数据没有清除，图片和用户名都不会刷新
+                // 删除个人信息表里的数据
+                UserInfoRspDBHelper.deleteUserInfoRsp(requireContext())
+                //跳转到Login登录界面
                 ARouter.getInstance().build("/login/login").navigation()
             }
 
             //头像 跳转到 个人信息
             ivUserIconMine.setOnClickListener {
                 //点击的时候赋值以免拿到空值
-                val info = viewModel.liveInfo.value
+                val info = viewModel.liveInfoRsp.value
                 info?.let {
                     val action = MineFragmentDirections.actionMineFragmentToUserInfoFragment(info)
                     findNavController().navigate(action)
@@ -64,8 +57,8 @@ class MineFragment : BaseFragment() {
 
             //未登录状态下点击用户名位置跳转到登录界面
             tvUserNameMine.setOnClickListener {
-                val info = viewModel.liveInfo.value
-                ToastUtils.showShort("此时的username值为${info?.username}")
+                val info = viewModel.liveInfoRsp.value
+                // ToastUtils.showShort("此时的username值为${info?.username}")
                 if (info == null) ARouter.getInstance().build("/login/login").navigation()
             }
 
@@ -77,12 +70,35 @@ class MineFragment : BaseFragment() {
         //登录成功后会跳转到Mine这个界面，然后去获取数据库里的数据
         //requireContext 返回此片段的上下文
         //观察数据库的Userinfo,如果拿到userinfo获取用户个人信息，把token传进去
+
+        //此时观察的只是userinfo账号登录信息
         DbHelper.getLiveUserInfo(requireContext()).observeKt {
-            LogUtils.d("当前的token是${it?.token}")
+            // LogUtils.d("当前的token是否存在:${it?.token}")
             it?.let {
                 viewModel.getUserInfo(it.token)
             }
         }
+
+        //观察个人信息表
+        UserInfoRspDBHelper.getLiveUserInfoRsp(requireContext()).observeKt { info ->
+            // LogUtils.d("个人信息表是否存在:${info?.username}")
+            info?:let { //如果这个表为空就执行
+                //清空liveInfoRsp的数据，此时info=null
+                viewModel.liveInfoRsp.value = info
+            }
+        }
+
+        viewModel.apply {
+            //如果Liveinfo数据更新不为空的话就存储到数据库中
+            liveInfo.observeKt {
+                it?.let {
+                    UserInfoRspDBHelper.insertUserInfoRsp(requireContext(), it)
+                    //将数据给到布局的livedata
+                    liveInfoRsp.value = it
+                }
+            }
+        }
+
     }
 
 
