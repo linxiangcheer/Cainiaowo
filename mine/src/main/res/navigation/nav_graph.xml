@@ -24,7 +24,7 @@
         >
         <argument
             android:name="info"
-            app:argType="com.cniao5.mine.net.UserInfoRsp" />
+            app:argType="com.cniao5.mine.repo.UserInfoRspData" />
     </fragment>
 
 

@@ -6,7 +6,8 @@
     <data>
         <variable
             name="info"
-            type="com.cniao5.mine.net.UserInfoRsp" />
+            type="com.cniao5.mine.repo.UserInfoRspData" />
+
 
     </data>
 

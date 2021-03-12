@@ -7,7 +7,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /*
-* cniao数据库操作帮助类
+* 数据库操作帮助类
 * */
 
 object DbHelper {

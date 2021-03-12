@@ -51,6 +51,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 it.also {
                     //将数据保存到数据库里
                     DbHelper.insertUserInfo(context, it)
+                    //保存token值
                     MySpUtils.put(SP_KEY_USER_TOKEN, it.token)
                 }
                 //关闭Activity

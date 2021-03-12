@@ -16,7 +16,7 @@ import com.cniao5.mine.databinding.FragmentUserInfoBinding
 * */
 class UserInfoFragment : BaseFragment() {
 
-    //获取传过来的Args数据,所有的参数都在args里
+    //获取传过来的Args数据,所有的参数都在args里 当前类名+Args
     private val args by navArgs<UserInfoFragmentArgs>()
 
     override fun getLayoutRes() = R.layout.fragment_user_info
