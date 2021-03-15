@@ -20,7 +20,7 @@ class MineViewModel(private val repo: IMineResource): BaseViewModel() {
     // val liveUser = MutableLiveData<UserInfo>()
 
     //用在userInfoRspFragment中
-    val liveInfo: LiveData<UserInfoRsp> = repo.liveUserInfo
+    val liveInforep: LiveData<UserInfoRsp> = repo.liveUserInfo
 
     //用于布局的Livedata
     val liveInfoRsp = MutableLiveData<UserInfoRsp>()

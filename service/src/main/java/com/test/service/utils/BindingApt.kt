@@ -25,6 +25,7 @@ fun imgSrcCompat(iv: ImageView, src: Any?) {
     val imgRes = when(src) {
         is String -> {
             when {
+                //如果开头是//img.cniao5.com就添加前缀https:
                 src.startsWith("//img.cniao5.com") -> "https:$src"
                 else -> src
             }

@@ -9,8 +9,7 @@ import com.cniao5.common.widget.BnvVp2Mediator
 import com.cniao5.course.CourseFragment
 import com.cniao5.home.HomeFragment
 import com.cniao5.mine.MineContainerFragment
-import com.cniao5.mine.ui.MineFragment
-import com.cniao5.study.StudyFragment
+import com.cniao5.study.ui.StudyFragment
 
 /*
 * App主工程的入口界面
@@ -69,8 +68,9 @@ class MainViewPagerAdapter(fragmentActivity: FragmentActivity, private val fragm
 
     //创建fragment invoke回调函数，让它实例化创建新的对象
     override fun createFragment(position: Int) = fragments[position]?.invoke() ?: error("请确保fragment数据源和viewPager2的index匹配设置")
-
 }
+
+
 //类型别名定义 传入的是一个代码块，每次都是一个新的Fragment
 typealias ReFragment = () -> Fragment
 

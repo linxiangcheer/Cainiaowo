@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.cniao5.study.net.StudiedRsp.Data" />
+
+        <import type="com.cniao5.study.utils.StudyUtils"/>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0.5dp"
+        app:contentPadding="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--scaleType="centerCrop"保持长宽比缩放-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_badge_item_study"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/img_course"
+                app:srcCompat="@{StudyUtils.parseImage(info)}"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_item_study"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_badge_item_study"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="测试测试测试测试测试测试测试测试测试测试测试测试"
+                android:text="@{StudyUtils.parseTitle(info)}"
+                />
+
+            <com.daimajia.numberprogressbar.NumberProgressBar
+                android:id="@+id/npb_progress_item_study"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title_item_study"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_item_study"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_item_study"
+                app:progress_max="100"
+                app:progress_reached_color="@color/colorAccent"
+                tools:progress_current="14"
+                app:progress_current="@{info.progress}"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -12,6 +12,7 @@ android {
     defaultConfig{
         //只要独立运行时候才需要applicationId
         if (singleModule.toBoolean()){
+            //唯一的身份标记
             applicationId "com.cniao5.cainiaowo.mine"
         }
     }

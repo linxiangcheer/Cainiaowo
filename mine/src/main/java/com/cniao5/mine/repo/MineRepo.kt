@@ -6,10 +6,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.cniao5.common.network.support.serverData
 import com.cniao5.mine.net.MineService
 import com.cniao5.mine.net.UserInfoRsp
-import com.test.service.net.onFailure
-import com.test.service.net.onSuccess
-import com.test.service.net.onBizError
-import com.test.service.net.onBizOK
+import com.test.service.net.*
 
 
 /*
