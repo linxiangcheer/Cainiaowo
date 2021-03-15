@@ -101,8 +101,9 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.6"
 
     //region jetpack组件分页，上拉加载平滑过渡效果
-    implementation "androidx.paging:paging-runtime:2.1.2"
-    testImplementation "androidx.paging:paging-common:2.1.2"
+    def paging_version = "3.0.0-beta01"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    testImplementation "androidx.paging:paging-common:$paging_version"
     //endregion
 
     //region Description 注意配置navigetion版本号的时候，project下的build.gradle的class path也需要同步navigation的版本号配置
@@ -133,7 +134,7 @@ dependencies {
 
     //region test libs
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //endregion
 }

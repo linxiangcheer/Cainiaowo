@@ -1,27 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    >
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="com.cniao5.study.utils.StudyUtils"/>
+        <variable
+            name="vm"
+            type="com.cniao5.study.ui.StudyViewModel" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title_fragment"
+        <View
+            android:id="@+id/v_top_bg_study"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="StudyFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="200dp"
+            android:background="@drawable/shape_white_card_bg"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_icon_study"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="@id/v_top_bg_study"
+            app:layout_constraintStart_toStartOf="@id/v_top_bg_study"
+            app:layout_constraintTop_toTopOf="@id/v_top_bg_study"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
+            app:srcCompat="@{vm.obUserInfo.logo_url}"
+            tools:srcCompat="@drawable/icon_default_header"
+        />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_icon_study"
+            app:layout_constraintStart_toStartOf="@id/iv_icon_study"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon_study"
+            android:text="@{vm.obUserInfo.username??@string/study_name}"
+            tools:text="菜鸟窝"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_today_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="今日学习"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/v_top_bg_study"
+            app:layout_constraintEnd_toStartOf="@id/tv_total_study"
+            app:layout_constraintStart_toStartOf="@id/v_top_bg_study" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_total_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总共学习"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_today_study"
+            app:layout_constraintEnd_toStartOf="@id/tv_rank_study"
+            app:layout_constraintStart_toEndOf="@id/tv_today_study" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rank_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学习排名"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_today_study"
+            app:layout_constraintEnd_toEndOf="@id/v_top_bg_study"
+            app:layout_constraintStart_toEndOf="@id/tv_total_study" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_today_minute_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_today_study"
+            app:layout_constraintEnd_toStartOf="@id/tv_today_minute_unit_study"
+            app:layout_constraintStart_toStartOf="@id/tv_today_study"
+            android:text="@{vm.liveStudyInfoR.todayStudyTime+``}"
+            tools:text="68" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_today_minute_unit_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分钟"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_today_minute_study"
+            app:layout_constraintEnd_toEndOf="@id/tv_today_study"
+            app:layout_constraintStart_toEndOf="@id/tv_today_minute_study" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_total_minute_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_today_minute_study"
+            app:layout_constraintEnd_toStartOf="@id/tv_total_minute_unit_study"
+            app:layout_constraintStart_toStartOf="@id/tv_total_study"
+            android:text="@{vm.liveStudyInfoR.totalStudyTime+``}"
+            tools:text="168" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_total_minute_unit_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="分钟"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_total_minute_study"
+            app:layout_constraintEnd_toEndOf="@id/tv_total_study"
+            app:layout_constraintStart_toEndOf="@id/tv_total_minute_study" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rank_value_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_total_minute_study"
+            app:layout_constraintEnd_toEndOf="@id/tv_rank_study"
+            app:layout_constraintStart_toStartOf="@id/tv_rank_study"
+            android:text="@{StudyUtils.rankStr(vm.liveStudyInfoR.rank)}"
+            tools:text="千里之外"
+            />
+
+
+        <View
+            android:id="@+id/v_center_bg_study"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_white_card_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_top_bg_study" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_study"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/rv_study"
+            app:layout_constraintTop_toTopOf="@id/v_center_bg_study"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="bottom"
+            >
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最近学习" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的课程" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_study"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorWindowBackGround"
+            android:orientation="vertical"
+            tools:itemCount="16"
+            tools:listitem="@layout/item_course_study"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/v_center_bg_study"
+            app:layout_constraintTop_toBottomOf="@id/tl_study"
+            app:adapter="@{vm.adapter}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

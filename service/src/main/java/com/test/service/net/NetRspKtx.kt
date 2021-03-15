@@ -38,18 +38,20 @@ inline fun <reified T> BaseResponse.toEntity(): T? {
 }
 
 /**
- * 接口成功，但是业务返回code不是1的情况
+ * 接口成功，但是业务返回code不是1或1001的情况
  */
 @OptIn(ExperimentalContracts::class)
-inline fun BaseResponse.onBizError(crossinline block: (code: Int, message: String) -> Unit): BaseResponse {
+inline fun BaseResponse.onBizError(crossinline block: (code: Int, message: String?) -> Unit): BaseResponse {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
-    if (code != BaseResponse.SERVER_CODE_SUCCESS || code != BaseResponse.SERVER_CODE_SUCCESS1) { //code == 除了1001和1之外的其他,不成功
+    if (code != BaseResponse.SERVER_CODE_SUCCESS1 && code != BaseResponse.SERVER_CODE_SUCCESS) { //同时不等于1和1001的时候执行if
         block.invoke(code, message ?: "Error Message Null") //返回错误码和错误信息
     }
     return this
 }
+
+
 
 /**
  * 接口成功且业务成功code==1的情况
@@ -60,7 +62,6 @@ inline fun <reified T> BaseResponse.onBizOK(crossinline action: (code: Int, data
     contract {
         callsInPlace(action, InvocationKind.AT_MOST_ONCE)
     }
-    com.blankj.utilcode.util.LogUtils.i("获取data成功 $data")
     if (code == BaseResponse.SERVER_CODE_SUCCESS || code == BaseResponse.SERVER_CODE_SUCCESS1) { //code == 1001或code == 1,成功
         action.invoke(code, this.toEntity<T>(), message) //返回成功码和解密之后的序列化对象
     }

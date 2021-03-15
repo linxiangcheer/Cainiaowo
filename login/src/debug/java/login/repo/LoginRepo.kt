@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import com.blankj.utilcode.util.LogUtils
 import com.cniao5.common.model.SingleLiveData
 import com.cniao5.common.network.support.serverData
-import com.test.service.net.onBizError
-import com.test.service.net.onBizOK
-import com.test.service.net.onFailure
-import com.test.service.net.onSuccess
+import com.test.service.net.*
 import login.net.LoginService
 import login.net.LoginReqBody
 import login.net.LoginRsp
@@ -37,7 +34,7 @@ class LoginRepo(private val service: LoginService) : ILoginResource{
                 }
                 onBizOK<RegisterRsp> { code, data, message ->
                     _registerRsp.value = data
-                    LogUtils.i("是否注册 BizOK $data")
+                    // LogUtils.i("是否注册 BizOK $data")
                     return@onBizOK
                 }
             }
@@ -57,7 +54,6 @@ class LoginRepo(private val service: LoginService) : ILoginResource{
                 onBizOK<LoginRsp> { code, data, message ->
                     _loginRsp.value = data
                     //同步到room数据库 登录状态
-
                     LogUtils.i("登录接口 BizOK $data")
                     return@onBizOK
                 }

@@ -1,6 +1,7 @@
 package com.cniao5.mine.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
@@ -90,7 +91,7 @@ class MineFragment : BaseFragment() {
 
         viewModel.apply {
             //如果Liveinfo数据更新不为空的话就存储到数据库中
-            liveInfo.observeKt {
+            liveInforep.observeKt {
                 it?.let {
                     UserInfoRspDBHelper.insertUserInfoRsp(requireContext(), it)
                     //将数据给到布局的livedata
