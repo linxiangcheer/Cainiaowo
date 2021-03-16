@@ -45,6 +45,7 @@
                 android:textColor="@color/colorPrimaryText"
                 android:layout_marginTop="6dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="6dp"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_badge_item_study"
@@ -54,6 +55,7 @@
                 android:text="@{StudyUtils.parseTitle(info)}"
                 />
 
+            <!--这里自定义了progress数据-->
             <com.daimajia.numberprogressbar.NumberProgressBar
                 android:id="@+id/npb_progress_item_study"
                 android:layout_width="0dp"
@@ -65,8 +67,9 @@
                 app:progress_max="100"
                 app:progress_reached_color="@color/colorAccent"
                 tools:progress_current="14"
-                app:progress_current="@{info.progress}"
+                app:progress_current="@{StudyUtils.getRandomProgress}"
                 />
+<!--                app:progress_current="@{info.progress}"-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

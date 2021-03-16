@@ -8,6 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/*
+* 用户详情的数据库
+* */
 object StudyInfoDbHelper {
     /**
      * 以普通数据对象的形式，获取数据

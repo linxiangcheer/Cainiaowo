@@ -1,16 +1,14 @@
 package com.cniao5.study.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.LogUtils
 import com.cniao5.common.base.BaseFragment
 import com.cniao5.study.R
 import com.cniao5.study.databinding.FragmentStudyBinding
 import com.cniao5.study.repo.StudyInfoDbHelper
+import com.google.android.material.tabs.TabLayout
 import com.test.service.repo.DbHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,12 +29,32 @@ class StudyFragment: BaseFragment() {
     //传入view,将view和databinding绑定到一起
     override fun bindView(view: View, savedInstanceState: Bundle?): ViewDataBinding {
         return FragmentStudyBinding.bind(view).apply {
-            vm = viewModel //记得加
+            vm = viewModel //记得加 关联viewmodel对象
+
+            //tablayout点击事件
+            tlStudy.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                //tab被选的时候回调
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    //页面position从0开始
+                    // Log.d("yyy","${tab!!.position}")
+                }
+                //tab未被选择时回调
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+                //tab重新选择时回调
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                }
+
+            })
         }
+
+
     }
 
-    override fun initData() {
-        super.initData()
+    override fun initConfig() {
+        super.initConfig()
 
         DbHelper.getLiveUserInfo(requireContext()).observeKt {
             // it.let {
@@ -50,6 +68,7 @@ class StudyFragment: BaseFragment() {
             } else {
                 viewModel.obUserInfo.set(it) //数据库发生变化的时候拿到Userinfo的值
                 viewModel.getStudyData()
+                // viewModel.adapterPaging.refresh() //paging3手动的下拉刷新
             }
         }
 
@@ -59,10 +78,22 @@ class StudyFragment: BaseFragment() {
                 //将数据保存到数据库
                 it?.let { StudyInfoDbHelper.insertStudyInfo(requireContext(), it) }
             }
-            //已经学习过的课程列表
+            //已经学习过的课程列表 使用传统加载数据的方式实现
             liveStudyList.observeKt {
                 adapter.submit(it?.datas?: emptyList())
             }
+
+            //paging分页库加载数据方式实现 挂起函数需要在协程里启动
+            //当控制这个LifecycleCoroutineScope的生命周期至少处于Lifecycle. state时，启动并运行给定的块
+            // lifecycleScope.launchWhenCreated {
+            //     //观察pagingdata
+            //     pagingData().observeKt {
+            //         it?.let {
+            //             adapterPaging.submitData(lifecycle, it)
+            //         }
+            //     }
+            // }
+
         }
 
         //studyinfo数据库的数据有变化时触发
@@ -71,6 +102,11 @@ class StudyFragment: BaseFragment() {
                 viewModel.liveStudyInfoR.value = info //清空liveStudyInfoR的数据
             }
         }
+    }
+
+
+    override fun initData() {
+        super.initData()
     }
 
 }

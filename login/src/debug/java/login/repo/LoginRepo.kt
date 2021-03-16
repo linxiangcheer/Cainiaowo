@@ -54,7 +54,7 @@ class LoginRepo(private val service: LoginService) : ILoginResource{
                 onBizOK<LoginRsp> { code, data, message ->
                     _loginRsp.value = data
                     //同步到room数据库 登录状态
-                    LogUtils.i("登录接口 BizOK $data")
+                    // LogUtils.i("登录接口 BizOK $data")
                     return@onBizOK
                 }
             }

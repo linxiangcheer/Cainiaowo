@@ -7,6 +7,9 @@ import com.cniao5.common.model.DataResult
 import com.cniao5.common.model.succeeded
 import com.cniao5.common.network.support.CnUtils
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -28,10 +31,20 @@ inline fun <reified T> BaseResponse.toEntity(): T? {
 
     //todo 如果有需要的话在这里对返回的data数据进行解密然后再tojson fromjson
 
+    // val decodeData = CnUtils.decodeData(data.toString())
+    //gson不允许我们将json对象采用String,所以单独处理
+    // if (T::class.java.isAssignableFrom(String::class.java)) {
+    //     return decodeData as T
+    // }
+
     //如果data不为空，先进行tojson处理再转化为T对象类型的entity string
     //传入LoginRsp就是LoginRsp  传入RegisterRsp就是RegisterRsp
     return kotlin.runCatching {
-        GsonUtils.fromJson(Gson().toJson(data), T::class.java)
+        // if (data is JsonObject){
+        // } else if (data is JsonArray) {
+        //     return GsonUtils.fromJson(Gson())
+        // }
+             GsonUtils.fromJson(Gson().toJson(data), T::class.java)
     }.onFailure { e ->
         e.printStackTrace() //Catch出错，报错
     }.getOrNull() //不为空
