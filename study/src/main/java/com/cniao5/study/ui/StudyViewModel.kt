@@ -26,6 +26,8 @@ class StudyViewModel(private val resource: StudyResource) : BaseViewModel() {
 
     //我的学习列表适配器
     val adapter = StudiedAdapter()
+    //我的学习列表适配器 paging3 由于返回数据固定的原因，total_page一直为2，会报错IllegalStateException
+    // val adapterPaging = StudyPageAdapter()
 
     //请求数据
     fun getStudyData() = serverAwait {
@@ -33,6 +35,8 @@ class StudyViewModel(private val resource: StudyResource) : BaseViewModel() {
         resource.getStudyList()
         // resource.getBoughtCourse()
     }
+
+    suspend fun pagingData() = resource.pagingData().asLiveData()
 
 
 }

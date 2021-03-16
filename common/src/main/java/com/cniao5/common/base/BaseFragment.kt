@@ -63,7 +63,7 @@ abstract class BaseFragment: Fragment {
     * 扩展liveData的observer函数
     * livedata回传回来的数据可能为null
     * */
-    protected fun <T: Any> LiveData<T>.observeKt(block:(T?) -> Unit) {
+    protected fun <T: Any?> LiveData<T>.observeKt(block:(T?) -> Unit) {
         this.observe(viewLifecycleOwner, Observer { data ->
             // block.invoke(data)
             block(data)

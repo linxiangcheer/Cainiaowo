@@ -14,8 +14,8 @@ class ServiceHostKit : AbstractKit() {
 
     private val hostMap = mapOf<String, String>(
         "开发环境Host" to HOST_DEV,
-        "测试环境Host" to HOST_QA,
-        "线上正式Host" to HOST_PRODUCT
+        "测试环境Host(无)" to HOST_QA,
+        "线上正式Host(无)" to HOST_PRODUCT
     )
 
     private val hosts = hostMap.values.toTypedArray()

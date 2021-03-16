@@ -2,7 +2,7 @@ package com.cniao5.common.network.config
 
 
 
-const val NET_CONFIG_APPID="tcvEYU1WEc"
+const val NET_CONFIG_APPID="tcvEYUlWEc"
 const val ENT_CONFIG_APPKEY="J#y9sJesv*5HmqLqEV1yUPYfpH\$pHx\$!"
 
 //本地缓存的数据字段key

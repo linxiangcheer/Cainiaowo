@@ -25,4 +25,9 @@ interface IStudyResource {
     //用户购买的课程
     suspend fun getBoughtCourse()
 
+    /*
+    * 将studyPageSource转化为flow数据
+    * */
+    suspend fun pagingData(): Flow<PagingData<StudiedRsp.Data>>
+
 }

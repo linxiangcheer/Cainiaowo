@@ -191,6 +191,7 @@
             app:layout_constraintTop_toBottomOf="@id/tl_study"
             app:adapter="@{vm.adapter}"
             />
+<!--            app:adapter="@{vm.adapterPaging}"paging方式的adapter-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

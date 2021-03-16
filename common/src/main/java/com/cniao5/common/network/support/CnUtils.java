@@ -1,5 +1,7 @@
 package com.cniao5.common.network.support;
 
+import androidx.annotation.Nullable;
+
 import com.blankj.utilcode.util.EncryptUtils;
 import com.cniao5.common.network.config.CnConfigKtKt;
 
@@ -80,8 +82,10 @@ public class CnUtils {
 
     /**
      * 解析返回的data数据
+     * 字段、参数、返回值可以合法为空
      */
-    public static String decodeData(String dataStr) {
+    @Nullable
+    public static String decodeData(@Nullable String dataStr) {
         //java代码，无自动null判断，需要自行处理
         if (dataStr != null) {
             return new String(EncryptUtils.decryptBase64AES(dataStr.getBytes(), CnConfigKtKt.ENT_CONFIG_APPKEY.getBytes(), "" +

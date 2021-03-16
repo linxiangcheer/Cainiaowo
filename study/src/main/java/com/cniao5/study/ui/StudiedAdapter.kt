@@ -10,6 +10,7 @@ class StudiedAdapter : RecyclerView.Adapter<StudiedVH>() {
 
     private val mList = mutableListOf<StudiedRsp.Data>()
 
+    /*recyclerview初始化*/
     fun submit(list: List<StudiedRsp.Data>) {
         mList.clear()
         mList.addAll(list)
@@ -26,6 +27,9 @@ class StudiedAdapter : RecyclerView.Adapter<StudiedVH>() {
 
 }
 
+/*
+* 比较通用的recyclerview.viewholder创建方式
+* */
 class StudiedVH(private val binding: ItemCourseStudyBinding) : RecyclerView.ViewHolder(binding.root){
 
     companion object {
@@ -42,8 +46,8 @@ class StudiedVH(private val binding: ItemCourseStudyBinding) : RecyclerView.View
 
     fun bind(info: StudiedRsp.Data) {
         binding.info = info
-        //直接把数据给进度条控件
-        binding.npbProgressItemStudy.progress = info.progress.toInt()
+        //把获取到的progress进度条数据给进度条 也可以用扩展函数app:progress_current实现
+        // binding.npbProgressItemStudy.progress = info.progress.toInt()
         binding.executePendingBindings()
     }
 

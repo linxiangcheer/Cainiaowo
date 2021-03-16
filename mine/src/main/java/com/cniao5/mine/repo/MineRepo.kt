@@ -28,7 +28,7 @@ class MineRepo(private val service: MineService) :IMineResource{
                 }
                 onBizOK<UserInfoRsp> { code, data, message ->
                     _userInfoRsp.value = data
-                    LogUtils.i("获取用户信息 BizOK $data")
+                    // LogUtils.i("获取用户信息 BizOK $data")
                     return@onBizOK
                 }
             }
