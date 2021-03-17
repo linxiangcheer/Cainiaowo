@@ -17,5 +17,9 @@ android {
 }
 dependencies {
     implementation project(path:':service')
+    //第三方banner
+    implementation 'com.youth.banner:banner:2.1.0'
+
     //from dependencies.gradle
+
 }

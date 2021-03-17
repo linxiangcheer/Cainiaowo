@@ -5,7 +5,7 @@ import com.cniao5.study.net.StudiedRsp
 import com.daimajia.numberprogressbar.NumberProgressBar
 
 /**
- *
+ * DataBinding数据解析
  */
 object StudyUtils {
     @JvmStatic

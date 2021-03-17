@@ -1,4 +1,4 @@
-package com.cniao5.mine.ui
+package com.cniao5.mine
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

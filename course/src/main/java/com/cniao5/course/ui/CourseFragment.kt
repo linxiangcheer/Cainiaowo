@@ -3,7 +3,6 @@ package com.cniao5.course.ui
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseFragment
+import com.cniao5.course.CourseViewModel
 import com.cniao5.course.R
 import com.cniao5.course.databinding.*
-import com.cniao5.course.net.CourseListRsp
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,11 +50,33 @@ class CourseFragment: BaseFragment() {
         mBinding = FragmentCourseBinding.bind(view)
 
         return mBinding.apply {
+
+            vm = viewModel
+
             val adapter = viewModel.coursePagingAdapter
             //下方的load Header头部load
             rvCourse.adapter = adapter.withLoadStateFooter(CourseLoadAdapter(adapter))
 
-            vm = viewModel
+            //Load上滑进度条监听
+            adapter.addLoadStateListener { loadState ->
+                if (loadState.refresh is LoadState.Loading) {
+                    pbFragmentCourse.visibility = View.VISIBLE
+                } else {
+                    pbFragmentCourse.visibility = View.GONE
+
+                    //获取加载错误事件
+                    val error = when {
+                        loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                        loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                        loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                        else -> null
+                    }
+
+                    error?.let {
+                        ToastUtils.showShort(it.error.message)
+                    }
+                }
+            }
 
             viewModel.apply {
 
@@ -116,27 +137,6 @@ class CourseFragment: BaseFragment() {
                 * */
                 liveCourseListRsp.observeKt {
                     courseRecycAdapter.submitClear(it?.datas ?: emptyList())
-                }
-
-                //Load上滑进度条监听
-                adapter.addLoadStateListener { loadState ->
-                    if (loadState.refresh is LoadState.Loading) {
-                        pbFragmentCourse.visibility = View.VISIBLE
-                    } else {
-                        pbFragmentCourse.visibility = View.GONE
-
-                        //获取加载错误事件
-                        val error = when {
-                            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
-                            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
-                            else -> null
-                        }
-
-                        error?.let {
-                            ToastUtils.showShort(it.error.message)
-                        }
-                    }
                 }
 
                 //全部类型按钮点击事件

@@ -7,7 +7,7 @@ import com.cniao5.cainiaowo.databinding.ActivityMainBinding
 import com.cniao5.common.base.BaseActivity
 import com.cniao5.common.widget.BnvVp2Mediator
 import com.cniao5.course.ui.CourseFragment
-import com.cniao5.home.HomeFragment
+import com.cniao5.home.ui.HomeFragment
 import com.cniao5.mine.MineContainerFragment
 import com.cniao5.study.ui.StudyFragment
 

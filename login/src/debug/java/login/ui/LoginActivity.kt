@@ -1,15 +1,15 @@
-package login
+package login.ui
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseActivity
 import com.cniao5.common.ktx.context
 import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
 import com.cniao5.common.utils.MySpUtils
 import com.test.service.repo.DbHelper
+import login.LoginViewModel
+import login.R
 import login.databinding.ActivityLoginBinding
-import login.net.LoginRsp
 import login.net.RegisterRsp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

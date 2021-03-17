@@ -3,7 +3,7 @@
     package="login">
 
     <application>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".ui.LoginActivity"
             android:launchMode="singleTop">
         </activity>
     </application>

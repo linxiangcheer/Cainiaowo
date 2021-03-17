@@ -1,20 +1,16 @@
 package com.cniao5.mine.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseFragment
 import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
 import com.cniao5.common.utils.MySpUtils
+import com.cniao5.mine.MineViewModel
 import com.cniao5.mine.R
 import com.cniao5.mine.databinding.FragmentMineBinding
-import com.cniao5.mine.net.UserInfoRsp
-import com.cniao5.mine.repo.UserInfoRspDB
 import com.cniao5.mine.repo.UserInfoRspDBHelper
 import com.test.service.repo.DbHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel

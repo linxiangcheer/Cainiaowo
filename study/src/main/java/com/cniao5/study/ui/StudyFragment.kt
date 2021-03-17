@@ -1,11 +1,12 @@
 package com.cniao5.study.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.lifecycleScope
 import com.cniao5.common.base.BaseFragment
 import com.cniao5.study.R
+import com.cniao5.study.StudyViewModel
 import com.cniao5.study.databinding.FragmentStudyBinding
 import com.cniao5.study.repo.StudyInfoDbHelper
 import com.google.android.material.tabs.TabLayout
@@ -17,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 * 学习中心的Fragmennt
 * 传入了R.layout.fragment_course之后就不用写onCreateView,因为布局已经被关联到fragment里了
 * */
-class StudyFragment: BaseFragment() {
+class StudyFragment : BaseFragment() {
 
     private val viewModel: StudyViewModel by viewModel()
 
@@ -38,10 +39,12 @@ class StudyFragment: BaseFragment() {
                     //页面position从0开始
                     // Log.d("yyy","${tab!!.position}")
                 }
+
                 //tab未被选择时回调
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
 
                 }
+
                 //tab重新选择时回调
                 override fun onTabReselected(tab: TabLayout.Tab?) {
 
@@ -65,6 +68,7 @@ class StudyFragment: BaseFragment() {
                 //清空界面上的数据
                 StudyInfoDbHelper.deleteStudyInfo(requireContext())
                 viewModel.obUserInfo.set(it) //数据库发生变化的时候拿到Userinfo的值
+                viewModel.adapter.submit(emptyList()) //清空recyclerview的数据
             } else {
                 viewModel.obUserInfo.set(it) //数据库发生变化的时候拿到Userinfo的值
                 viewModel.getStudyData()
@@ -80,7 +84,7 @@ class StudyFragment: BaseFragment() {
             }
             //已经学习过的课程列表 使用传统加载数据的方式实现
             liveStudyList.observeKt {
-                adapter.submit(it?.datas?: emptyList())
+                adapter.submit(it?.datas ?: emptyList())
             }
 
             //paging分页库加载数据方式实现 挂起函数需要在协程里启动
@@ -96,11 +100,9 @@ class StudyFragment: BaseFragment() {
 
         }
 
-        //studyinfo数据库的数据有变化时触发
+        //studyinfo数据库的数据有变化时触发 用户信息
         StudyInfoDbHelper.getLiveStudyInfo(requireContext()).observeKt { info ->
-            info.let {
-                viewModel.liveStudyInfoR.value = info //清空liveStudyInfoR的数据
-            }
+            viewModel.liveStudyInfoR.value = info //清空liveStudyInfoR的数据
         }
     }
 
