@@ -33,7 +33,7 @@ class CourseTypes: ArrayList<CourseTypes.CourseTypeItem>(){
 * */
 @Keep
 data class CourseListRsp(
-    val datas: List<Data?>?,
+    val datas: List<Data>?,
     val page: Int,
     val size: Int,
     val total: Int,
@@ -70,7 +70,7 @@ data class CourseListRsp(
         val lessonsPlayedTime: Int, // 学习人数
         val name: String?, // 名字
         @SerializedName("now_price")
-        val nowPrice: Int // 当前价格
+        val nowPrice: Double // 当前价格
     ) {
         @Keep
         data class FirstCategory( //  一级分类

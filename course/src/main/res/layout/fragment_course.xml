@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="vm"
+            type="com.cniao5.course.ui.CourseViewModel" />
 
     </data>
 
@@ -87,7 +90,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_type_course"
+            tools:listitem="@layout/item_course_recyc"
             />
+<!--            app:adapter="@{vm.courseRecycAdapter}"-->
 
         <ProgressBar
             android:id="@+id/pb_fragment_course"
