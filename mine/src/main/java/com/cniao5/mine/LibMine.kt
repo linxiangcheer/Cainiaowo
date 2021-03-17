@@ -5,7 +5,6 @@ import com.cniao5.common.utils.getBaseHost
 import com.cniao5.mine.net.MineService
 import com.cniao5.mine.repo.IMineResource
 import com.cniao5.mine.repo.MineRepo
-import com.cniao5.mine.ui.MineViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.bind

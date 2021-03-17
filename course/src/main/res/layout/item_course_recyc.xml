@@ -102,7 +102,7 @@
                 android:gravity="center"
                 android:paddingVertical="2dp"
                 android:text="免费学"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/lightseagreen"
                 android:textSize="12sp"
                 android:visibility="@{(info.isFree()==1)?View.VISIBLE:View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"

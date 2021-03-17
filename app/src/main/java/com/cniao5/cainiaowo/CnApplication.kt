@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.cniao5.common.BaseApplication
 import com.cniao5.common.ktx.application
 import com.cniao5.course.moduleCourse
+import com.cniao5.home.moduleHome
 import com.cniao5.mine.moduleMine
 import com.cniao5.study.moduleStudy
 import com.test.service.assistant.AssistantApp
@@ -15,7 +16,7 @@ import org.koin.core.module.Module
 class CnApplication : BaseApplication() {
 
     private val modules = arrayListOf<Module>(
-        moduleService,/*moduleHome,*/ moduleLogin, moduleMine, moduleStudy, moduleCourse
+        moduleService, moduleHome, moduleLogin, moduleMine, moduleStudy, moduleCourse
     )
 
     override fun initConfig() {

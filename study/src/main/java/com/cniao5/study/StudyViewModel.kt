@@ -1,4 +1,4 @@
-package com.cniao5.study.ui
+package com.cniao5.study
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -9,6 +9,7 @@ import com.cniao5.study.net.BoughtRsp
 import com.cniao5.study.net.StudiedRsp
 import com.cniao5.study.net.StudyInfoRsp
 import com.cniao5.study.repo.StudyResource
+import com.cniao5.study.ui.StudiedAdapter
 import com.test.service.repo.UserInfo
 
 class StudyViewModel(private val resource: StudyResource) : BaseViewModel() {

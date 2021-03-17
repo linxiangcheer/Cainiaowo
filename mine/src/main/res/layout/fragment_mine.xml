@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.cniao5.mine.ui.MineViewModel" />
+            type="com.cniao5.mine.MineViewModel" />
 
         <import type="android.view.View"/>
 

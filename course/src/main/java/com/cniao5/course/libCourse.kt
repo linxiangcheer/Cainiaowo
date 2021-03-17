@@ -5,7 +5,6 @@ import com.cniao5.common.utils.getBaseHost
 import com.cniao5.course.net.CourseService
 import com.cniao5.course.repo.CourseResource
 import com.cniao5.course.repo.ICourseResource
-import com.cniao5.course.ui.CourseViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.bind

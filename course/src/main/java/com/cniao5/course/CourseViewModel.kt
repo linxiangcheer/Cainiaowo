@@ -1,4 +1,4 @@
-package com.cniao5.course.ui
+package com.cniao5.course
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -7,6 +7,8 @@ import com.cniao5.common.base.BaseViewModel
 import com.cniao5.course.net.CourseListRsp
 import com.cniao5.course.net.CourseTypes
 import com.cniao5.course.repo.ICourseResource
+import com.cniao5.course.ui.CoursePagingAdapter
+import com.cniao5.course.ui.CourseRecycAdapter
 
 class CourseViewModel(val repo: ICourseResource) : BaseViewModel() {
 
