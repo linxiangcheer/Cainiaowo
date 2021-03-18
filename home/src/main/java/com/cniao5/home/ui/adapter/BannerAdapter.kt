@@ -13,7 +13,7 @@ import com.youth.banner.holder.BannerImageHolder
 /*
 * 首页上方banner的适配器,传入bannerList解析的数据格式
 * */
-class BannerAdapter(val bannerList: BannerList) : BannerImageAdapter<BannerList.BannerListItem>(bannerList) {
+class BannerAdapter(private val bannerList: BannerList) : BannerImageAdapter<BannerList.BannerListItem>(bannerList) {
     override fun onBindView(
         holder: BannerImageHolder?,
         data: BannerList.BannerListItem?,

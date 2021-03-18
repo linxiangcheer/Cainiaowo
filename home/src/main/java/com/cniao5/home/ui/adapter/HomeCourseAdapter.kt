@@ -35,7 +35,7 @@ class HomeCourseAdapter(private val mList: List<HomeCourseItem>) : RecyclerView.
         fun bind(info: HomeCourseItem) {
             binding.info = info
             binding.tvOldPriceItemCourse.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG //中划线
-            itemView.setOnClickListener { //itemView点击事件
+            itemView.setOnClickListener { //todo图片点击事件
                 // WebViewActivity.openUrl(it.context, info.course?.h5site ?: "https://m.cniao5.com")
                 ToastUtils.showShort("点击事件")
             }

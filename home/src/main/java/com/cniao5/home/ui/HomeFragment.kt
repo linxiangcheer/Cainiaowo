@@ -55,18 +55,18 @@ class HomeFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-
+        viewmodel.apply {
+            //上方banner
+            getBanner()
+            //模块名字、请求地址id url
+            getHomeList()
+        }
     }
 
     override fun initData() {
         super.initData()
 
         viewmodel.apply {
-            //上方banner
-            getBanner()
-            //模块名字、请求地址id url
-            getHomeList()
-
             liveBanner.observeKt {
                 it ?: return@observeKt
                 bannerList.clear()
