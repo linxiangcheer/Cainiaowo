@@ -20,4 +20,35 @@ interface HomeService {
         @Query("page_show") pageshow:Int = 1  //页面显示 1 首页 2 课程 3 大数据学院 4 机器人学院 5 人工智能学院 6 推广员 默认1
     ) : Call<BaseResponse>
 
+    /*
+    * 获取首页模块名字、请求地址列表
+    * */
+    @GET("allocation/module/list")
+    fun getHomeList(@Query("page_id") pageid : Int = 1) : Call<BaseResponse>
+
+    /*
+    * 获取模块详情，只返回就业办数据，错误
+    * */
+    // @GET("/allocation/component/list")
+    // fun getModuleDatas(@Query("module_id") moduleid : Int) : Call<BaseResponse>
+
+    /*
+    * 获取首页就业班数据
+    * */
+    @GET("allocation/component/list")
+    fun getJobDatas(@Query("module_id") moduleid : Int) : Call<BaseResponse>
+
+    /*
+    * 获取课程推荐
+    * */
+    @GET("course/related/recommend")
+    fun getHomeCourse(@Query("course_id") courseid: Int = 10119) : Call<BaseResponse>
+
+    /*
+    * 获取讲师推荐
+    * */
+    @GET("teacher/list")
+    fun getTeacherList(@Query("page") page: Int = 1,
+                       @Query("size") size: Int = 10) : Call<BaseResponse>
+
 }

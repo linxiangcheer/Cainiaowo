@@ -1,5 +1,7 @@
 package com.cniao5.home.ui.adapter
 
+import android.widget.Toast
+import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -37,5 +39,10 @@ class BannerAdapter(val bannerList: BannerList) : BannerImageAdapter<BannerList.
             .load(imageUrl)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
             .into(holder.imageView)
+
+        //todo 添加holder.itview的点击事件,打开data.redirectUrl
+        holder.itemView.setOnClickListener {
+            ToastUtils.showShort("${data?.redirectUrl}")
+        }
     }
 }
