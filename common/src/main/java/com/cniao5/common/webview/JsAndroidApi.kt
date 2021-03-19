@@ -8,7 +8,7 @@ import com.cniao5.common.utils.MySpUtils.getString
 
 
 /*
- * 
+ *
  */
 object JsAndroidApi {
 
