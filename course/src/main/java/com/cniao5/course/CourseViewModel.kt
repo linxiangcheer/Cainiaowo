@@ -10,15 +10,12 @@ import com.cniao5.course.net.CourseTypes
 import com.cniao5.course.repo.ICourseResource
 import com.cniao5.course.ui.CoursePagingAdapter
 import com.cniao5.course.ui.CourseRecycAdapter
+import com.cniao5.course.ui.playvideo.PlayVideoActivity
 
 class CourseViewModel(val repo: ICourseResource) : BaseViewModel() {
 
     //Recyclerview的Adapter
     val courseRecycAdapter = CourseRecycAdapter()
-    //执行一次item点击事件
-    val coursePagingAdapter = CoursePagingAdapter {
-        ToastUtils.showShort("你好") //todo 跳转至播放页面，并且将数据传过去
-    }
 
     //课程分类
     val liveCourseType: LiveData<CourseTypes?> = repo.liveCourseType

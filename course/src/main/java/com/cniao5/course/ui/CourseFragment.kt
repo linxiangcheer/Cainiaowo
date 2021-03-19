@@ -16,6 +16,7 @@ import com.cniao5.common.base.BaseFragment
 import com.cniao5.course.CourseViewModel
 import com.cniao5.course.R
 import com.cniao5.course.databinding.*
+import com.cniao5.course.ui.playvideo.PlayVideoActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +29,11 @@ class CourseFragment: BaseFragment() {
 
     private val viewModel: CourseViewModel by viewModel()
     private lateinit var mBinding: FragmentCourseBinding
+
+    //传url并跳转到playvideoactivity
+    private val coursePagingAdapter = CoursePagingAdapter {
+        PlayVideoActivity.openPlayVideo(requireContext(), "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") //todo测试url
+    }
 
     //初始化为all,点击上方tabitem之后记得重新赋值
     private var code = "all"     //方向从课程分类接口获取    默认 all;例如 android,python
@@ -53,7 +59,7 @@ class CourseFragment: BaseFragment() {
 
             vm = viewModel
 
-            val adapter = viewModel.coursePagingAdapter
+            val adapter = coursePagingAdapter
             //下方的load Header头部load
             rvCourse.adapter = adapter.withLoadStateFooter(CourseLoadAdapter(adapter))
 
@@ -360,7 +366,7 @@ class CourseFragment: BaseFragment() {
         // viewModel.getCourseList(code, difficulty, is_free,q)
         lifecycleScope.launchWhenCreated {
             viewModel.getCourseListPaging(code = code, difficulty, is_free, q).collectLatest {
-                viewModel.coursePagingAdapter.submitData(it)
+                coursePagingAdapter.submitData(it)
             }
         }
     }
