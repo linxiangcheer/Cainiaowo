@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/CommonTheme"
         tools:replace="android:label,android:name"
-        >
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

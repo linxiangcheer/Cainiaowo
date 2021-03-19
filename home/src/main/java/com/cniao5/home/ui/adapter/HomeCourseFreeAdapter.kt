@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.cniao5.common.webview.WebViewActivity
 import com.cniao5.home.databinding.ItemHomeCourseBinding
 import com.cniao5.home.databinding.ItemHomeCourseFreeBinding
 import com.cniao5.home.net.HomeCourseItem
@@ -38,8 +39,8 @@ class HomeCourseFreeAdapter(private val mList: LimitFreeList) : RecyclerView.Ada
             binding.info = info
             binding.tvOldPriceItemCourse.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG //中划线
             itemView.setOnClickListener { //itemView点击事件
-                // WebViewActivity.openUrl(it.context, info.course?.h5site ?: "https://m.cniao5.com")
-                ToastUtils.showShort("点击事件")
+                // ToastUtils.showShort("点击事件")
+                WebViewActivity.openUrl(it.context, "https://www.cniao5.com/course/10201")
             }
             binding.executePendingBindings()
         }

@@ -1,5 +1,6 @@
 package com.cniao5.home.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,12 +39,15 @@ class HomeFragment : BaseFragment() {
 
     private val homeList = arrayListOf<HomeData>() //真正的homeList详细数据 type title data
 
+    private lateinit var mbinding: FragmentHomeBinding
+
     //传入布局资源,将布局和view绑定到一起
     override fun getLayoutRes() = R.layout.fragment_home
 
     //传入view,将view和databinding绑定到一起
     override fun bindView(view: View, savedInstanceState: Bundle?): ViewDataBinding {
-        return FragmentHomeBinding.bind(view).apply {
+        mbinding = FragmentHomeBinding.bind(view)
+        return mbinding.apply {
 
             //adapter传给databinding，可以直接绑定
             adapter = this@HomeFragment.adapter
@@ -67,8 +71,16 @@ class HomeFragment : BaseFragment() {
         super.initData()
 
         viewmodel.apply {
+
+            //加载进度条显示
+            isLoading.observe(viewLifecycleOwner) {
+                //协程block获取数据代码块是否结束，协程结束时为false
+                mbinding.pbFragmentCourse.visibility = if (it) View.VISIBLE else View.INVISIBLE
+            }
+
             liveBanner.observeKt {
                 it ?: return@observeKt
+
                 bannerList.clear()
                 bannerList.addAll(it) //todo 添加多两次，因为返回的只有一个数据
                 bannerList.addAll(it)
@@ -78,7 +90,10 @@ class HomeFragment : BaseFragment() {
 
             val scope = CoroutineScope(SupervisorJob()) //全部完成才会报成功，只要有一个失败就返回失败
             liveHomeList.observeKt { homedatas ->
+                // Log.d("yyy", homedatas.toString())
                 homedatas ?: return@observeKt //如果返回的是空就结束
+
+                // Log.d("yyy","liveHomeList请求数据")
 
                 lifecycleScope.launchWhenCreated {
                     //返回一个列表，其中包含对原始集合中的每个元素应用给定转换函数的结果
@@ -90,7 +105,8 @@ class HomeFragment : BaseFragment() {
                                 .await() //等待，不结束之前不会获取下一个数据
                         )
                     }.asFlow().collect {
-                        it.third?.let { it3 -> parseData(it.first, it.second, it3) }
+                        it.third?.let { it3 -> parseData(it.first, it.second, it3)
+                        }
                     }
                     //排序，把金牌讲师放到最后
                     adapter.upRecyclerViewList(putTeacherLast(homeList)) //把数据传给HomeAdapter适配器,让它去分配数据
@@ -155,24 +171,71 @@ class HomeFragment : BaseFragment() {
 
     }
 
+    //重排序 把"金牌讲师"放在最后  只在flag = false的之后执行
     fun putTeacherLast(list: ArrayList<HomeData>) : ArrayList<HomeData>{
         var teacherdata: HomeData? = null
-        var flag = false
-
-        for (i in 0 until list.size -1) {
-            if (list[i].title.equals("金牌讲师")) {
-                teacherdata = list[i]
-                flag = true
-                list.removeAt(i)
-            }
-        }
-
-        if (flag) {
-            teacherdata?.let { list.add(list.size, it) }
+            for (i in 0 until list.size -1) {
+                if (list[i].title.equals("金牌讲师") && i != list.size - 1) {
+                    teacherdata = list[i]
+                    list.removeAt(i)
+                    teacherdata.let { list.add(list.size, it) }
+                }
         }
         return list
     }
 
+    // private val TAG = "yyy"
+    //
+    // override fun onAttach(context: Context) {
+    //     super.onAttach(context)
+    //     Log.d(TAG, "onAttach: ")
+    // }
+    //
+    // override fun onCreate(savedInstanceState: Bundle?) {
+    //     super.onCreate(savedInstanceState)
+    //     Log.d(TAG, "onCreate: ")
+    // }
+    //
+    // override fun onDestroyView() {
+    //     super.onDestroyView()
+    //     Log.d(TAG, "onDestroyView: ")
+    // }
+
+    //activity被销毁的时候清除数据
+    override fun onDetach() {
+        super.onDetach()
+        homeList.clear() //清空list的数据
+        viewmodel.liveBanner.value?.clear() //清空liveBanner的数据
+        viewmodel.liveHomeList.value?.clear() //清空liveHomeList的数据
+        adapter.clearRecyclerViewList() //清空recyclerview的数据
+    }
+
+
+    // override fun onDestroy() {
+    //     super.onDestroy()
+    //     Log.d(TAG,"onDestroy")
+    // }
+    //
+    // override fun onStart() {
+    //     super.onStart()
+    //     Log.d(TAG,"onstart")
+    // }
+    //
+    // override fun onPause() {
+    //     super.onPause()
+    //     Log.d(TAG,"onPause")
+    // }
+    //
+    // override fun onStop() {
+    //     super.onStop()
+    //     Log.d(TAG,"onstop")
+    //     // viewmodel.liveHomeList.value?.clear()
+    // }
+    //
+    // override fun onResume() {
+    //     super.onResume()
+    //     Log.d(TAG,"onresume")
+    // }
 
     companion object {
 

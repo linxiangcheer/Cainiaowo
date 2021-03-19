@@ -32,4 +32,7 @@ dependencies {
 
     //腾讯的key-value
     implementation 'com.tencent:mmkv-static:1.2.1'
+
+    //网页加载
+    implementation 'com.just.agentweb:agentweb-androidx:4.1.4'
 }

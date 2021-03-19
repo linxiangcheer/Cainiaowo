@@ -32,6 +32,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterVH>() {
         notifyDataSetChanged()
     }
 
+    //清空RecyclerView数据
+    fun clearRecyclerViewList() {
+        this.homeList.clear()
+        notifyDataSetChanged()
+    }
+
     //Recyclerview中嵌套Recyclerview
     class HomeAdapterVH(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {

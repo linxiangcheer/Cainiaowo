@@ -2,5 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cniao5.common">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--AgentWeb 是默认允许定位的 ，如果你需要该功能 ， 请在你的 AndroidManifest 文件里面加入如下权限 。-->
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+<application>
+    <!--hardwareAccelerated打开硬件加速-->
+    <!--configChanges防止activity 在部分状态改变时重新回调各个生命周期，导致播放异常或失败-->
+    <!--singleTop若实例存在就不会再新建 = 只启动一个-->
+    <activity android:name=".webview.WebViewActivity"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:hardwareAccelerated="true"
+        android:launchMode="singleTop"
+        >
+
+    </activity>
+</application>
+
 </manifest>

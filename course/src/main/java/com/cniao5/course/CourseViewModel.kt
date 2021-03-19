@@ -3,6 +3,7 @@ package com.cniao5.course
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseViewModel
 import com.cniao5.course.net.CourseListRsp
 import com.cniao5.course.net.CourseTypes
@@ -14,7 +15,10 @@ class CourseViewModel(val repo: ICourseResource) : BaseViewModel() {
 
     //Recyclerview的Adapter
     val courseRecycAdapter = CourseRecycAdapter()
-    val coursePagingAdapter = CoursePagingAdapter()
+    //执行一次item点击事件
+    val coursePagingAdapter = CoursePagingAdapter {
+        ToastUtils.showShort("你好") //todo 跳转至播放页面，并且将数据传过去
+    }
 
     //课程分类
     val liveCourseType: LiveData<CourseTypes?> = repo.liveCourseType

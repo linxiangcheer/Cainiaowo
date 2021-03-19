@@ -1,6 +1,7 @@
 package com.cniao5.common.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ abstract class BaseFragment: Fragment {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Log.d("yyy", "onCreateView: ")
         return inflater.inflate(getLayoutRes(), container, false)
     }
 
@@ -62,6 +64,7 @@ abstract class BaseFragment: Fragment {
     /*
     * 扩展liveData的observer函数
     * livedata回传回来的数据可能为null
+    * 不用写viewLifecycleOwner
     * */
     protected fun <T: Any?> LiveData<T>.observeKt(block:(T?) -> Unit) {
         this.observe(viewLifecycleOwner, Observer { data ->

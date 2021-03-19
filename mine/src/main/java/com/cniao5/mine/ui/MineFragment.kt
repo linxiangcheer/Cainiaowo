@@ -5,9 +5,11 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseFragment
 import com.cniao5.common.network.config.SP_KEY_USER_TOKEN
 import com.cniao5.common.utils.MySpUtils
+import com.cniao5.common.webview.WebViewActivity
 import com.cniao5.mine.MineViewModel
 import com.cniao5.mine.R
 import com.cniao5.mine.databinding.FragmentMineBinding
@@ -57,6 +59,36 @@ class MineFragment : BaseFragment() {
                 val info = viewModel.liveInfoRsp.value
                 // ToastUtils.showShort("此时的username值为${info?.username}")
                 if (info == null) ARouter.getInstance().build("/login/login").navigation()
+            }
+            //各个按钮的点击事件，跳转到H5
+            tvOrdersMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/user/order")
+            }
+            tvCouponMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/user/coupon")
+            }
+            isvStudyCardMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/sharecard")
+            }
+            isvShareSaleMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/distribution")
+            }
+            isvGroupShoppingMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/user/pintuan")
+            }
+            isvLikedCourseMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                WebViewActivity.openUrl(requireContext(), "https://m.cniao5.com/user/favorites")
+            }
+            isvFeedbackMine.setOnClickListener {
+                ToastUtils.showShort("正在访问正式接口")
+                //8.0以后不建议用http,需要在app manifest中声明 android:usesCleartextTraffic="true"
+                WebViewActivity.openUrl(requireContext(), "http://cniao555.mikecrm.com/ktbB0ht")
             }
 
         }

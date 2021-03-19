@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.cniao5.common.webview.WebViewActivity
 import com.cniao5.home.databinding.ItemTeacherBinding
 import com.cniao5.home.net.TeacherList
 
@@ -35,8 +36,8 @@ class HomeTeacherAdapter(private val mList: TeacherList) : RecyclerView.Adapter<
         fun bind(info: TeacherList.Datas) {
             binding.info = info
             itemView.setOnClickListener { //itemView点击事件
-                // WebViewActivity.openUrl(it.context, info.course?.h5site ?: "https://m.cniao5.com")
-                ToastUtils.showShort("点击事件")
+                // ToastUtils.showShort("点击事件")
+                WebViewActivity.openUrl(it.context, "https://m.cniao5.com/")
             }
             binding.executePendingBindings()
         }

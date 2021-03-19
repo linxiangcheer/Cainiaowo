@@ -5,6 +5,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.cniao5.common.webview.WebViewActivity
 import com.cniao5.home.R
 import com.cniao5.home.net.BannerList
 import com.youth.banner.adapter.BannerImageAdapter
@@ -42,7 +43,8 @@ class BannerAdapter(private val bannerList: BannerList) : BannerImageAdapter<Ban
 
         //todo 添加holder.itview的点击事件,打开data.redirectUrl
         holder.itemView.setOnClickListener {
-            ToastUtils.showShort("${data?.redirectUrl}")
+            // ToastUtils.showShort("${data?.redirectUrl}")
+            WebViewActivity.openUrl(it.context, data?.redirectUrl ?: "https://m.cniao5.com/")
         }
     }
 }

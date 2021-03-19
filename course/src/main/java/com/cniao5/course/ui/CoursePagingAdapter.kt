@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cniao5.course.databinding.ItemCourseRecycBinding
 import com.cniao5.course.net.CourseListRsp
 
-class CoursePagingAdapter : PagingDataAdapter<CourseListRsp.Data, CourseViewHolder>(differCallback){
+class CoursePagingAdapter(private val callback: (CourseListRsp.Data) -> Unit) : PagingDataAdapter<CourseListRsp.Data, CourseViewHolder>(differCallback){
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         //在第几项触发的加载
-        getItem(position)?.let {
-            holder.bind(it)
+        getItem(position)?.let { itemdata ->
+            holder.bind(itemdata)
+            holder.itemView.setOnClickListener { //lambda表达式简化点击事件
+                callback.invoke(itemdata)
+            }
         }
     }
 

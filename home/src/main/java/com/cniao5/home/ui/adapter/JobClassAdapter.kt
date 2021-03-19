@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.cniao5.common.webview.WebViewActivity
 import com.cniao5.home.databinding.ItemJobClassBinding
 import com.cniao5.home.net.JobClassList
 
@@ -33,8 +34,8 @@ class JobClassAdapter(private val jobClassList: JobClassList) : RecyclerView.Ada
         fun bind(info: JobClassList.JobClassListItem) {
             binding.url = info.course?.imgUrl //把图片和data binding的url绑定
             itemView.setOnClickListener { //itemView点击事件
-                // WebViewActivity.openUrl(it.context, info.course?.h5site ?: "https://m.cniao5.com")
-                ToastUtils.showShort("点击事件")
+                // ToastUtils.showShort("点击事件")
+                WebViewActivity.openUrl(it.context, "https://www.cniao5.com/course/10201")
             }
             binding.executePendingBindings()
         }
