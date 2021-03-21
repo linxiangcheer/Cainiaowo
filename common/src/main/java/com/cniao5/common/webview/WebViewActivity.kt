@@ -48,7 +48,7 @@ class WebViewActivity : AppCompatActivity() {
         //        mAgentWeb.urlLoader.loadUrl("file:///android_asset/test.html")
         mAgentWeb.urlLoader.loadUrl(url)
         //添加js调用native的函数
-        // mAgentWeb.jsInterfaceHolder.addJavaObject(JS_CALL_APP_KEY, JsAndroidApi)
+        // mAgentWeb.jsInterfaceHolder.addJavaObject(JS_CALL_APP_KEY, JsAndroidApi) //把本地保存的appkey给h5调用方，h5不用再次登录
         //开启webview的调试
         AgentWebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
     }
