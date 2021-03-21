@@ -38,4 +38,13 @@ interface CourseService {
     * */
 
 
+    /*
+    * 获取课程播放目录详细列表
+    * */
+    @GET("course/chapter")
+    fun getCourseDetails(
+        @Query("course_id") courseid: Int //课程ID
+    ): Call<BaseResponse>
+
+
 }

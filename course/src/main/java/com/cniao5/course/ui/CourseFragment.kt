@@ -32,7 +32,8 @@ class CourseFragment: BaseFragment() {
 
     //传url并跳转到playvideoactivity
     private val coursePagingAdapter = CoursePagingAdapter {
-        PlayVideoActivity.openPlayVideo(requireContext(), "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") //todo测试url
+        PlayVideoActivity.openPlayVideo(requireContext(), "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4", it) //todo测试url
+        // PlayVideoActivity.openPlayVideo(requireContext(), it.imgUrl)
     }
 
     //初始化为all,点击上方tabitem之后记得重新赋值

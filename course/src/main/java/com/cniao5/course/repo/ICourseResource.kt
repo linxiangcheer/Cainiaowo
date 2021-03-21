@@ -2,6 +2,7 @@ package com.cniao5.course.repo
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
+import com.cniao5.course.net.CourseDetails
 import com.cniao5.course.net.CourseListRsp
 import com.cniao5.course.net.CourseTypes
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +11,7 @@ interface ICourseResource {
 
     val liveCourseType: LiveData<CourseTypes?>
     val liveCourseListRsp: LiveData<CourseListRsp?>
+    val liveCourseDetails: LiveData<CourseDetails?>
 
     //课程分类
     suspend fun getCourseCategory()
@@ -37,5 +39,10 @@ interface ICourseResource {
         is_free: Int,
         q: Int
     ): Flow<PagingData<CourseListRsp.Data>>
+
+    //课程播放目录列表
+    suspend fun getCourseDetails(
+        course_id: Int
+    )
 
 }

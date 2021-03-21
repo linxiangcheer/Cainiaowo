@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.*
 import com.blankj.utilcode.util.LogUtils
 import com.cniao5.common.network.support.serverData
+import com.cniao5.course.net.CourseDetails
 import com.cniao5.course.net.CourseListRsp
 import com.cniao5.course.net.CourseService
 import com.cniao5.course.net.CourseTypes
@@ -27,6 +28,12 @@ class CourseResource(val service: CourseService) : ICourseResource {
     override val liveCourseListRsp: LiveData<CourseListRsp?>
         get() = _liveCourseListRsp
 
+    //课程播放目录列表
+    private val _liveCourseDetails = MutableLiveData<CourseDetails?>()
+    override val liveCourseDetails: LiveData<CourseDetails?>
+        get() = _liveCourseDetails
+
+    //课程分类
     override suspend fun getCourseCategory() {
         service.getCourseCategory()
             .serverData()
@@ -44,6 +51,7 @@ class CourseResource(val service: CourseService) : ICourseResource {
             }
     }
 
+    //课程列表
     override suspend fun getCourseList(
         code: String, //方向从课程分类接口获取    默认 all;例如 android,python
         difficulty: Int, // 难度 (-1 全部) (1 初级) (2 中级) (3 高级) (4 架构) 默认 -1
@@ -67,7 +75,7 @@ class CourseResource(val service: CourseService) : ICourseResource {
     }
 
     /*
-    * paging3
+    * 课程列表的paging3
     * */
     private val pageSize = 10
     override suspend fun getCourseListPaging(
@@ -87,6 +95,9 @@ class CourseResource(val service: CourseService) : ICourseResource {
         }.flow
     }
 
+    /*
+    * 课程列表的Source
+    * */
     class CourseListPagingSource constructor(
         private val service: CourseService,
         // private val course_type: Int,//类型 (-1 全部) (1 普通课程) (2 职业课程/班级课程) (3 实战课程) 默认 -1
@@ -133,6 +144,27 @@ class CourseResource(val service: CourseService) : ICourseResource {
             return result
         }
 
+    }
+
+
+    /*
+    * 课程播放目录列表
+    * */
+    override suspend fun getCourseDetails(course_id: Int) {
+        service.getCourseDetails(course_id)
+            .serverData()
+            .onSuccess {
+                onBizError { code, message ->
+                    LogUtils.w("获取课程播放目录 BizError $code,$message")
+                }
+                onBizOK<CourseDetails> { code, data, message ->
+                    _liveCourseDetails.value = data
+                    LogUtils.i("获取课程播放目录 BizOK $data")
+                }
+            }
+            .onFailure {
+                LogUtils.e("获取课程播放目录 接口异常 ${it.message}")
+            }
     }
 
 }

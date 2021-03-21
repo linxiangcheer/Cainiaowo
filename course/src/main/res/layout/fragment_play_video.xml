@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="info"
+            type="com.cniao5.course.net.CourseListRsp.Data" />
+
+        <variable
+            name="vm"
+            type="com.cniao5.course.PlayVideoViewModel" />
 
     </data>
 
@@ -11,8 +20,9 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -20,9 +30,45 @@
             <cn.jzvd.JzvdStd
                 android:id="@+id/jz_video"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="250dp" />
 
         </FrameLayout>
+
+        <include
+            android:id="@+id/cl_card_course"
+            layout="@layout/playvideo_course_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:info="@{info}"
+            android:layout_margin="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+            />
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/ditails_recycler"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cl_card_course"-->
+<!--            />-->
+
+        <ExpandableListView
+            android:id="@+id/listview"
+            android:groupIndicator="@null"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_card_course"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

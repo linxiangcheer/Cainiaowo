@@ -31,4 +31,6 @@ val moduleCourse = module {
 
     viewModel { CourseViewModel(get()) }
 
+    viewModel { PlayVideoViewModel(get()) }
+
 }

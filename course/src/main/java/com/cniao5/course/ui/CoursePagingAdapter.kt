@@ -3,11 +3,13 @@ package com.cniao5.course.ui
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cniao5.course.databinding.ItemCourseRecycBinding
 import com.cniao5.course.net.CourseListRsp
+import com.cniao5.course.ui.playvideo.PlayVideoActivity
 
 class CoursePagingAdapter(private val callback: (CourseListRsp.Data) -> Unit) : PagingDataAdapter<CourseListRsp.Data, CourseViewHolder>(differCallback){
 
@@ -17,6 +19,7 @@ class CoursePagingAdapter(private val callback: (CourseListRsp.Data) -> Unit) : 
             holder.bind(itemdata)
             holder.itemView.setOnClickListener { //lambda表达式简化点击事件
                 callback.invoke(itemdata)
+                // it.context可以拿到上下文
             }
         }
     }

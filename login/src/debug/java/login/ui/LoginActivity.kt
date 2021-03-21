@@ -43,16 +43,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         //在UI里观察两个请求的返回结果
         viewModel.apply {
             liveRegisterRsp.observerKt {
-                if (it.is_register == RegisterRsp.FLAG_IS_REGISTERED) {
+                if (it?.is_register == RegisterRsp.FLAG_IS_REGISTERED) {
                     repoLogin() //登录请求
                 }
             }
             liveLoginRsp.observerKt {
                 it.also {
                     //将数据保存到数据库里
-                    DbHelper.insertUserInfo(context, it)
+                    it?.let { DbHelper.insertUserInfo(context, it) }
                     //保存token值
-                    MySpUtils.put(SP_KEY_USER_TOKEN, it.token)
+                    MySpUtils.put(SP_KEY_USER_TOKEN, it?.token)
                 }
                 //关闭Activity
                 finish()

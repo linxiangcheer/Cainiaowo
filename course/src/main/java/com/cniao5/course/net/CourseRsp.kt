@@ -31,6 +31,7 @@ class CourseTypes: ArrayList<CourseTypes.CourseTypeItem>(){
 /*
 * 课程列表，用于课程中心
 * */
+@Parcelize
 @Keep
 data class CourseListRsp(
     val datas: List<Data>?,
@@ -39,7 +40,8 @@ data class CourseListRsp(
     val total: Int,
     @SerializedName("total_page")
     val totalPage: Int
-) {
+) : Parcelable {
+    @Parcelize
     @Keep
     data class Data(
         val brief: String?, //  简介
@@ -71,12 +73,56 @@ data class CourseListRsp(
         val name: String?, // 名字
         @SerializedName("now_price")
         val nowPrice: Double // 当前价格
-    ) {
+    ) : Parcelable {
+        @Parcelize
         @Keep
         data class FirstCategory( //  一级分类
             val code: String?,
             val id: Int,
             val title: String?
+        ) : Parcelable
+    }
+}
+
+/*
+* 课程播放目录列表
+* */
+class CourseDetails : ArrayList<CourseDetails.CourseDetailsItem?>(){
+    @Keep
+    data class CourseDetailsItem(
+        val bsort: Int,
+        @SerializedName("class_id")
+        val classId: Int,
+        val id: Int,
+        val lessons: List<Lesson?>?,
+        val title: String?
+    ) {
+        @Keep
+        data class Lesson(
+            val bsort: Int,
+            @SerializedName("is_free")
+            val isFree: Int,
+            @SerializedName("is_live")
+            val isLive: Int,
+            val key: String?,
+            @SerializedName("lesson_id")
+            val lessonId: Int,
+            @SerializedName("live_begin_time")
+            val liveBeginTime: String?,
+            @SerializedName("live_end_time")
+            val liveEndTime: String?,
+            @SerializedName("live_plan_begin_time")
+            val livePlanBeginTime: String?,
+            @SerializedName("live_plan_end_time")
+            val livePlanEndTime: String?,
+            @SerializedName("live_status")
+            val liveStatus: Int,
+            val name: String?,
+            val state: Int,
+            @SerializedName("video_duration")
+            val videoDuration: String?,
+            @SerializedName("video_info_duration")
+            val videoInfoDuration: Int
         )
     }
 }
