@@ -53,7 +53,7 @@ class PlayVideoActivity : BaseActivity<FragmentPlayVideoBinding>() {
 
         //点击某个分组监听事件
         mBinding.listview.setOnGroupClickListener { parent, v, groupPosition, id ->
-            ToastUtils.showShort("你点击了${viewmodel.arrayLiveCourseDetails[groupPosition]}")
+            ToastUtils.showShort("你点击了${viewmodel.arrayLiveCourseDetails[groupPosition]?.title}")
             false //true 屏蔽一级列表点击
         }
 

@@ -3,6 +3,7 @@ package com.cniao5.study.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.study.databinding.ItemCourseStudyBinding
 import com.cniao5.study.net.StudiedRsp
 
@@ -48,6 +49,11 @@ class StudiedVH(private val binding: ItemCourseStudyBinding) : RecyclerView.View
         binding.info = info
         //把获取到的progress进度条数据给进度条 也可以用扩展函数app:progress_current实现
         // binding.npbProgressItemStudy.progress = info.progress.toInt()
+
+        binding.card.setOnClickListener {
+            ToastUtils.showShort("点击了${info.name}")
+        }
+
         binding.executePendingBindings()
     }
 

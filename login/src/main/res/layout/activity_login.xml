@@ -107,7 +107,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入密码"
+                android:hint="任意8位或以上的密码"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:text="@={vm.obPassword}"

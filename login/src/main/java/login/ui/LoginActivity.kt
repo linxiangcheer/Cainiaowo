@@ -23,6 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initView() {
         super.initView()
+
         mBinding.apply {
             vm = viewModel
             //左上角退出按钮点击事件

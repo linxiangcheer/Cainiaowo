@@ -12,7 +12,8 @@
         android:theme="@style/CommonTheme">
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/modelu_name">
+            android:label="@string/modelu_name"
+            android:launchMode="singleTop">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

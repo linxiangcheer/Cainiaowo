@@ -3,7 +3,6 @@ package login
 import android.content.Context
 import android.view.View
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
 import com.blankj.utilcode.util.ToastUtils
 import com.cniao5.common.base.BaseViewModel
 import login.net.LoginReqBody

@@ -1,8 +1,6 @@
 package login.net
 
 import androidx.annotation.Keep
-import androidx.room.ColumnInfo
-import com.google.gson.annotations.SerializedName
 import com.test.service.repo.UserInfo
 
 /*
